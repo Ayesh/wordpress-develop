@@ -300,7 +300,7 @@ function wp_update_plugins( $extra_stats = array() ) {
 		foreach ( $plugins as $file => $p ) {
 			$new_option->checked[ $file ] = $p['Version'];
 
-			if ( ! isset( $current->checked[ $file ] ) || strval( $current->checked[ $file ] ) !== strval( $p['Version'] ) ) {
+			if ( ! isset( $current->checked[ $file ] ) || (string) $current->checked[ $file ] !== (string) $p['Version'] ) {
 				$plugin_changed = true;
 			}
 		}
@@ -482,7 +482,7 @@ function wp_update_themes( $extra_stats = array() ) {
 	if ( $time_not_changed && ! $extra_stats ) {
 		$theme_changed = false;
 		foreach ( $checked as $slug => $v ) {
-			if ( ! isset( $last_update->checked[ $slug ] ) || strval( $last_update->checked[ $slug ] ) !== strval( $v ) ) {
+			if ( ! isset( $last_update->checked[ $slug ] ) || (string) $last_update->checked[ $slug ] !== (string) $v ) {
 				$theme_changed = true;
 			}
 		}

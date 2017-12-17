@@ -175,7 +175,7 @@ class WP_Http_Curl {
 		curl_setopt( $handle, CURLOPT_HEADER, false );
 
 		if ( isset( $r['limit_response_size'] ) ) {
-			$this->max_body_length = intval( $r['limit_response_size'] );
+			$this->max_body_length = (int) $r['limit_response_size'];
 		} else {
 			$this->max_body_length = false;
 		}

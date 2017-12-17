@@ -228,7 +228,7 @@ switch ( $wp_list_table->current_action() ) {
 		}
 
 		if ( empty( $_REQUEST['users'] ) ) {
-			$userids = array( intval( $_REQUEST['user'] ) );
+			$userids = array( (int) $_REQUEST['user'] );
 		} else {
 			$userids = array_map( 'intval', (array) $_REQUEST['users'] );
 		}
@@ -381,7 +381,7 @@ foreach ( $userids as $id ) {
 		}
 
 		if ( empty( $_REQUEST['users'] ) ) {
-			$userids = array( intval( $_REQUEST['user'] ) );
+			$userids = array( (int) $_REQUEST['user'] );
 		} else {
 			$userids = $_REQUEST['users'];
 		}

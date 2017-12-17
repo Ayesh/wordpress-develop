@@ -102,7 +102,7 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 			);
 			if ( isset( $_wp_additional_image_sizes[ $s ]['width'] ) ) {
 				// For theme-added sizes
-				$sizes[ $s ]['width'] = intval( $_wp_additional_image_sizes[ $s ]['width'] );
+				$sizes[ $s ]['width'] = (int) $_wp_additional_image_sizes[ $s ]['width'];
 			} else {
 				// For default sizes set in options
 				$sizes[ $s ]['width'] = get_option( "{$s}_size_w" );
@@ -110,7 +110,7 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 
 			if ( isset( $_wp_additional_image_sizes[ $s ]['height'] ) ) {
 				// For theme-added sizes
-				$sizes[ $s ]['height'] = intval( $_wp_additional_image_sizes[ $s ]['height'] );
+				$sizes[ $s ]['height'] = (int) $_wp_additional_image_sizes[ $s ]['height'];
 			} else {
 				// For default sizes set in options
 				$sizes[ $s ]['height'] = get_option( "{$s}_size_h" );
@@ -238,13 +238,13 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 
 		foreach ( $fallback_sizes as $s ) {
 			if ( isset( $_wp_additional_image_sizes[ $s ]['width'] ) ) {
-				$sizes[ $s ]['width'] = intval( $_wp_additional_image_sizes[ $s ]['width'] );
+				$sizes[ $s ]['width'] = (int) $_wp_additional_image_sizes[ $s ]['width'];
 			} else {
 				$sizes[ $s ]['width'] = get_option( "{$s}_size_w" );
 			}
 
 			if ( isset( $_wp_additional_image_sizes[ $s ]['height'] ) ) {
-				$sizes[ $s ]['height'] = intval( $_wp_additional_image_sizes[ $s ]['height'] );
+				$sizes[ $s ]['height'] = (int) $_wp_additional_image_sizes[ $s ]['height'];
 			} else {
 				$sizes[ $s ]['height'] = get_option( "{$s}_size_h" );
 			}

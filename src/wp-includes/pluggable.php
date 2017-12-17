@@ -2425,7 +2425,7 @@ if ( ! function_exists( 'wp_rand' ) ) :
 			$value = $min + ( $max - $min + 1 ) * $value / ( $max_random_number + 1 );
 		}
 
-		return abs( intval( $value ) );
+		return abs( (int) $value );
 	}
 endif;
 

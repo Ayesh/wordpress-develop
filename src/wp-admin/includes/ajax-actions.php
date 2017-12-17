@@ -221,7 +221,7 @@ function wp_ajax_wp_compression_test() {
  * @since 3.1.0
  */
 function wp_ajax_imgedit_preview() {
-	$post_id = intval( $_GET['postid'] );
+	$post_id = (int) $_GET['postid'];
 	if ( empty( $post_id ) || ! current_user_can( 'edit_post', $post_id ) ) {
 		wp_die( -1 );
 	}
@@ -1824,7 +1824,7 @@ function wp_ajax_menu_quick_search() {
  */
 function wp_ajax_get_permalink() {
 	check_ajax_referer( 'getpermalink', 'getpermalinknonce' );
-	$post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
+	$post_id = isset( $_POST['post_id'] ) ? (int) $_POST['post_id'] : 0;
 	wp_die( get_preview_post_link( $post_id ) );
 }
 
@@ -1835,7 +1835,7 @@ function wp_ajax_get_permalink() {
  */
 function wp_ajax_sample_permalink() {
 	check_ajax_referer( 'samplepermalink', 'samplepermalinknonce' );
-	$post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
+	$post_id = isset( $_POST['post_id'] ) ? (int) $_POST['post_id'] : 0;
 	$title   = isset( $_POST['new_title'] ) ? $_POST['new_title'] : '';
 	$slug    = isset( $_POST['new_slug'] ) ? $_POST['new_slug'] : null;
 	wp_die( get_sample_permalink_html( $post_id, $title, $slug ) );
@@ -2374,7 +2374,7 @@ function wp_ajax_upload_attachment() {
  * @since 3.1.0
  */
 function wp_ajax_image_editor() {
-	$attachment_id = intval( $_POST['postid'] );
+	$attachment_id = (int) $_POST['postid'];
 	if ( empty( $attachment_id ) || ! current_user_can( 'edit_post', $attachment_id ) ) {
 		wp_die( -1 );
 	}
@@ -2409,12 +2409,12 @@ function wp_ajax_image_editor() {
 function wp_ajax_set_post_thumbnail() {
 	$json = ! empty( $_REQUEST['json'] ); // New-style request
 
-	$post_ID = intval( $_POST['post_id'] );
+	$post_ID = (int) $_POST['post_id'];
 	if ( ! current_user_can( 'edit_post', $post_ID ) ) {
 		wp_die( -1 );
 	}
 
-	$thumbnail_id = intval( $_POST['thumbnail_id'] );
+	$thumbnail_id = (int) $_POST['thumbnail_id'];
 
 	if ( $json ) {
 		check_ajax_referer( "update-post_$post_ID" );
@@ -2445,7 +2445,7 @@ function wp_ajax_set_post_thumbnail() {
  * @since 4.6.0
  */
 function wp_ajax_get_post_thumbnail_html() {
-	$post_ID = intval( $_POST['post_id'] );
+	$post_ID = (int) $_POST['post_id'];
 
 	check_ajax_referer( "update-post_$post_ID" );
 
@@ -2453,7 +2453,7 @@ function wp_ajax_get_post_thumbnail_html() {
 		wp_die( -1 );
 	}
 
-	$thumbnail_id = intval( $_POST['thumbnail_id'] );
+	$thumbnail_id = (int) $_POST['thumbnail_id'];
 
 	// For backward compatibility, -1 refers to no featured image.
 	if ( -1 === $thumbnail_id ) {
@@ -2938,7 +2938,7 @@ function wp_ajax_send_attachment_to_editor() {
 
 	$attachment = wp_unslash( $_POST['attachment'] );
 
-	$id = intval( $attachment['id'] );
+	$id = (int) $attachment['id'];
 
 	if ( ! $post = get_post( $id ) ) {
 		wp_send_json_error();
@@ -2950,7 +2950,7 @@ function wp_ajax_send_attachment_to_editor() {
 
 	if ( current_user_can( 'edit_post', $id ) ) {
 		// If this attachment is unattached, attach it. Primarily a back compat thing.
-		if ( 0 == $post->post_parent && $insert_into_post_id = intval( $_POST['post_id'] ) ) {
+		if ( 0 == $post->post_parent && $insert_into_post_id = (int) $_POST['post_id'] ) {
 			wp_update_post(
 				array(
 					'ID'          => $id,
@@ -3315,7 +3315,7 @@ function wp_ajax_parse_embed() {
 	if ( empty( $_POST['shortcode'] ) ) {
 		wp_send_json_error();
 	}
-	$post_id = isset( $_POST['post_ID'] ) ? intval( $_POST['post_ID'] ) : 0;
+	$post_id = isset( $_POST['post_ID'] ) ? (int) $_POST['post_ID'] : 0;
 	if ( $post_id > 0 ) {
 		$post = get_post( $post_id );
 		if ( ! $post || ! current_user_can( 'edit_post', $post->ID ) ) {
@@ -3364,9 +3364,9 @@ function wp_ajax_parse_embed() {
 	// Set $content_width so any embeds fit in the destination iframe.
 	if ( isset( $_POST['maxwidth'] ) && is_numeric( $_POST['maxwidth'] ) && $_POST['maxwidth'] > 0 ) {
 		if ( ! isset( $content_width ) ) {
-			$content_width = intval( $_POST['maxwidth'] );
+			$content_width = (int) $_POST['maxwidth'];
 		} else {
-			$content_width = min( $content_width, intval( $_POST['maxwidth'] ) );
+			$content_width = min( $content_width, (int) $_POST['maxwidth'] );
 		}
 	}
 

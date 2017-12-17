@@ -827,7 +827,7 @@ function wp_dashboard_recent_posts( $args ) {
 		'post_status'    => $args['status'],
 		'orderby'        => 'date',
 		'order'          => $args['order'],
-		'posts_per_page' => intval( $args['max'] ),
+		'posts_per_page' => (int) $args['max'],
 		'no_found_rows'  => true,
 		'cache_results'  => false,
 		'perm'           => ( 'future' === $args['status'] ) ? 'editable' : 'readable',

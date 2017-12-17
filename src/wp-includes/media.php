@@ -67,8 +67,8 @@ function image_constrain_size_for_editor( $width, $height, $size = 'medium', $co
 		$max_width  = $size[0];
 		$max_height = $size[1];
 	} elseif ( $size == 'thumb' || $size == 'thumbnail' ) {
-		$max_width  = intval( get_option( 'thumbnail_size_w' ) );
-		$max_height = intval( get_option( 'thumbnail_size_h' ) );
+		$max_width  = (int) get_option( 'thumbnail_size_w' );
+		$max_height = (int) get_option( 'thumbnail_size_h' );
 		// last chance thumbnail size defaults
 		if ( ! $max_width && ! $max_height ) {
 			$max_width  = 128;

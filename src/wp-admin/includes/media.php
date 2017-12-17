@@ -49,10 +49,10 @@ function update_gallery_tab( $tabs ) {
 		return $tabs;
 	}
 
-	$post_id = intval( $_REQUEST['post_id'] );
+	$post_id = (int) $_REQUEST['post_id'];
 
 	if ( $post_id ) {
-		$attachments = intval( $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->posts WHERE post_type = 'attachment' AND post_status != 'trash' AND post_parent = %d", $post_id ) ) );
+		$attachments = (int) $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->posts WHERE post_type = 'attachment' AND post_status != 'trash' AND post_parent = %d", $post_id ) );
 	}
 
 	if ( empty( $attachments ) ) {
@@ -135,7 +135,7 @@ function get_image_send_to_editor( $id, $caption, $title, $align, $url = '', $re
 		if ( is_string( $rel ) ) {
 			$rel = ' rel="' . esc_attr( $rel ) . '"';
 		} else {
-			$rel = ' rel="attachment wp-att-' . intval( $id ) . '"';
+			$rel = ' rel="attachment wp-att-' . (int) $id . '"';
 		}
 	} else {
 		$rel = '';
@@ -1458,7 +1458,7 @@ function get_media_items( $post_id, $errors ) {
 function get_media_item( $attachment_id, $args = null ) {
 	global $redir_tab;
 
-	if ( ( $attachment_id = intval( $attachment_id ) ) && $thumb_url = wp_get_attachment_image_src( $attachment_id, 'thumbnail', true ) ) {
+	if ( ( $attachment_id = (int) $attachment_id ) && $thumb_url = wp_get_attachment_image_src( $attachment_id, 'thumbnail', true ) ) {
 		$thumb_url = $thumb_url[0];
 	} else {
 		$thumb_url = false;
@@ -1906,7 +1906,7 @@ function get_compat_media_markup( $attachment_id, $args = null ) {
  * @since 2.5.0
  */
 function media_upload_header() {
-	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
+	$post_id = isset( $_REQUEST['post_id'] ) ? (int) $_REQUEST['post_id'] : 0;
 
 	echo '<script type="text/javascript">post_id = ' . $post_id . ';</script>';
 	if ( empty( $_GET['chromeless'] ) ) {
@@ -1937,7 +1937,7 @@ function media_upload_form( $errors = null ) {
 	}
 
 	$upload_action_url = admin_url( 'async-upload.php' );
-	$post_id           = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
+	$post_id           = isset( $_REQUEST['post_id'] ) ? (int) $_REQUEST['post_id'] : 0;
 	$_type             = isset( $type ) ? $type : '';
 	$_tab              = isset( $tab ) ? $tab : '';
 
@@ -2132,7 +2132,7 @@ function media_upload_type_form( $type = 'file', $errors = null, $id = null ) {
 
 	media_upload_header();
 
-	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
+	$post_id = isset( $_REQUEST['post_id'] ) ? (int) $_REQUEST['post_id'] : 0;
 
 	$form_action_url = admin_url( "media-upload.php?type=$type&tab=type&post_id=$post_id" );
 
@@ -2208,7 +2208,7 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 
 	media_upload_header();
 
-	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
+	$post_id = isset( $_REQUEST['post_id'] ) ? (int) $_REQUEST['post_id'] : 0;
 
 	$form_action_url = admin_url( "media-upload.php?type=$type&tab=type&post_id=$post_id" );
 	/** This filter is documented in wp-admin/includes/media.php */
@@ -2353,7 +2353,7 @@ function media_upload_gallery_form( $errors ) {
 	$redir_tab = 'gallery';
 	media_upload_header();
 
-	$post_id         = intval( $_REQUEST['post_id'] );
+	$post_id         = (int) $_REQUEST['post_id'];
 	$form_action_url = admin_url( "media-upload.php?type=$type&tab=gallery&post_id=$post_id" );
 	/** This filter is documented in wp-admin/includes/media.php */
 	$form_action_url = apply_filters( 'media_upload_form_url', $form_action_url, $type );
@@ -2512,7 +2512,7 @@ function media_upload_library_form( $errors ) {
 
 	media_upload_header();
 
-	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
+	$post_id = isset( $_REQUEST['post_id'] ) ? (int) $_REQUEST['post_id'] : 0;
 
 	$form_action_url = admin_url( "media-upload.php?type=$type&tab=library&post_id=$post_id" );
 	/** This filter is documented in wp-admin/includes/media.php */
@@ -2525,7 +2525,7 @@ function media_upload_library_form( $errors ) {
 
 	$q                   = $_GET;
 	$q['posts_per_page'] = 10;
-	$q['paged']          = isset( $q['paged'] ) ? intval( $q['paged'] ) : 0;
+	$q['paged']          = isset( $q['paged'] ) ? (int) $q['paged'] : 0;
 	if ( $q['paged'] < 1 ) {
 		$q['paged'] = 1;
 	}
@@ -2825,9 +2825,9 @@ function media_upload_flash_bypass() {
 	$browser_uploader = admin_url( 'media-new.php?browser-uploader' );
 
 	if ( $post = get_post() ) {
-		$browser_uploader .= '&amp;post_id=' . intval( $post->ID );
+		$browser_uploader .= '&amp;post_id=' . (int) $post->ID;
 	} elseif ( ! empty( $GLOBALS['post_ID'] ) ) {
-		$browser_uploader .= '&amp;post_id=' . intval( $GLOBALS['post_ID'] );
+		$browser_uploader .= '&amp;post_id=' . (int) $GLOBALS['post_ID'];
 	}
 
 	?>
@@ -2904,7 +2904,7 @@ function edit_form_image_editor( $post ) {
 	}
 
 	$thumb_url = false;
-	if ( $attachment_id = intval( $post->ID ) ) {
+	if ( $attachment_id = (int) $post->ID ) {
 		$thumb_url = wp_get_attachment_image_src( $attachment_id, array( 900, 450 ), true );
 	}
 

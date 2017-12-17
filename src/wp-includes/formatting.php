@@ -3330,8 +3330,8 @@ function iso8601_timezone_to_offset( $timezone ) {
 		$offset = 0;
 	} else {
 		$sign    = ( substr( $timezone, 0, 1 ) == '+' ) ? 1 : -1;
-		$hours   = intval( substr( $timezone, 1, 2 ) );
-		$minutes = intval( substr( $timezone, 3, 4 ) ) / 60;
+		$hours   = (int) substr( $timezone, 1, 2 );
+		$minutes = (int) substr( $timezone, 3, 4 ) / 60;
 		$offset  = $sign * HOUR_IN_SECONDS * ( $hours + $minutes );
 	}
 	return $offset;
@@ -4414,7 +4414,7 @@ function sanitize_option( $option, $value ) {
 			if ( null === $value ) {
 				$value = 1;
 			} else {
-				$value = intval( $value );
+				$value = (int) $value;
 			}
 			break;
 
@@ -4733,7 +4733,7 @@ function wp_sprintf( $pattern ) {
 			if ( $_fragment != $fragment ) {
 				$fragment = $_fragment;
 			} else {
-				$fragment = sprintf( $fragment, strval( $arg ) );
+				$fragment = sprintf( $fragment, (string) $arg );
 			}
 		}
 

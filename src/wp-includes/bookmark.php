@@ -175,9 +175,9 @@ function get_bookmarks( $args = '' ) {
 		if ( count( $inclinks ) ) {
 			foreach ( $inclinks as $inclink ) {
 				if ( empty( $inclusions ) ) {
-					$inclusions = ' AND ( link_id = ' . intval( $inclink ) . ' ';
+					$inclusions = ' AND ( link_id = ' . (int) $inclink . ' ';
 				} else {
-					$inclusions .= ' OR link_id = ' . intval( $inclink ) . ' ';
+					$inclusions .= ' OR link_id = ' . (int) $inclink . ' ';
 				}
 			}
 		}
@@ -192,9 +192,9 @@ function get_bookmarks( $args = '' ) {
 		if ( count( $exlinks ) ) {
 			foreach ( $exlinks as $exlink ) {
 				if ( empty( $exclusions ) ) {
-					$exclusions = ' AND ( link_id <> ' . intval( $exlink ) . ' ';
+					$exclusions = ' AND ( link_id <> ' . (int) $exlink . ' ';
 				} else {
-					$exclusions .= ' AND link_id <> ' . intval( $exlink ) . ' ';
+					$exclusions .= ' AND link_id <> ' . (int) $exlink . ' ';
 				}
 			}
 		}
@@ -227,9 +227,9 @@ function get_bookmarks( $args = '' ) {
 		if ( count( $incategories ) ) {
 			foreach ( $incategories as $incat ) {
 				if ( empty( $category_query ) ) {
-					$category_query = ' AND ( tt.term_id = ' . intval( $incat ) . ' ';
+					$category_query = ' AND ( tt.term_id = ' . (int) $incat . ' ';
 				} else {
-					$category_query .= ' OR tt.term_id = ' . intval( $incat ) . ' ';
+					$category_query .= ' OR tt.term_id = ' . (int) $incat . ' ';
 				}
 			}
 		}

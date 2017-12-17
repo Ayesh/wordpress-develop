@@ -520,7 +520,7 @@ function _wp_menu_item_classes_by_context( &$menu_items ) {
 			$classes[] = empty( $queried_object->taxonomy ) ? 'current-' . $queried_object->post_type . '-ancestor' : 'current-' . $queried_object->taxonomy . '-ancestor';
 		}
 
-		if ( in_array( intval( $parent_item->db_id ), $active_ancestor_item_ids ) ) {
+		if ( in_array( (int) $parent_item->db_id, $active_ancestor_item_ids ) ) {
 			$classes[]                                 = 'current-menu-ancestor';
 			$menu_items[ $key ]->current_item_ancestor = true;
 		}

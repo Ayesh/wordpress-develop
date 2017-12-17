@@ -109,8 +109,8 @@ class WP_Widget_Links extends WP_Widget {
 			$instance['orderby'] = $new_instance['orderby'];
 		}
 
-		$instance['category'] = intval( $new_instance['category'] );
-		$instance['limit']    = ! empty( $new_instance['limit'] ) ? intval( $new_instance['limit'] ) : -1;
+		$instance['category'] = (int) $new_instance['category'];
+		$instance['limit']    = ! empty( $new_instance['limit'] ) ? (int) $new_instance['limit'] : -1;
 
 		return $instance;
 	}
@@ -137,7 +137,7 @@ class WP_Widget_Links extends WP_Widget {
 			)
 		);
 		$link_cats = get_terms( 'link_category' );
-		if ( ! $limit = intval( $instance['limit'] ) ) {
+		if ( ! $limit = (int) $instance['limit'] ) {
 			$limit = -1;
 		}
 			?>
@@ -147,7 +147,7 @@ class WP_Widget_Links extends WP_Widget {
 		<option value=""><?php _ex( 'All Links', 'links widget' ); ?></option>
 		<?php
 		foreach ( $link_cats as $link_cat ) {
-			echo '<option value="' . intval( $link_cat->term_id ) . '"'
+			echo '<option value="' . (int) $link_cat->term_id . '"'
 				. selected( $instance['category'], $link_cat->term_id, false )
 				. '>' . $link_cat->name . "</option>\n";
 		}
@@ -173,7 +173,7 @@ class WP_Widget_Links extends WP_Widget {
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id( 'limit' ); ?>"><?php _e( 'Number of links to show:' ); ?></label>
-		<input id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" type="text" value="<?php echo $limit == -1 ? '' : intval( $limit ); ?>" size="3" />
+		<input id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" type="text" value="<?php echo $limit == -1 ? '' : (int) $limit; ?>" size="3" />
 		</p>
 		<?php
 	}

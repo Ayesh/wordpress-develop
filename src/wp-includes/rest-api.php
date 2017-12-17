@@ -1129,7 +1129,7 @@ function rest_validate_value_from_schema( $value, $args, $param = '' ) {
 		return new WP_Error( 'rest_invalid_param', sprintf( __( '%1$s is not of type %2$s.' ), $param, $args['type'] ) );
 	}
 
-	if ( 'integer' === $args['type'] && round( floatval( $value ) ) !== floatval( $value ) ) {
+	if ( 'integer' === $args['type'] && round( (float) $value ) !== (float) $value ) {
 		/* translators: 1: parameter, 2: type name */
 		return new WP_Error( 'rest_invalid_param', sprintf( __( '%1$s is not of type %2$s.' ), $param, 'integer' ) );
 	}
@@ -1288,7 +1288,7 @@ function rest_sanitize_value_from_schema( $value, $args ) {
 	}
 
 	if ( 'string' === $args['type'] ) {
-		return strval( $value );
+		return (string) $value;
 	}
 
 	return $value;

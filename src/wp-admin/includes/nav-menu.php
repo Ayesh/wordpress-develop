@@ -540,7 +540,7 @@ function wp_nav_menu_item_post_type_meta_box( $object, $box ) {
 						$front_page_obj->front_or_home = true;
 						array_unshift( $posts, $front_page_obj );
 					} else {
-						$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? intval( $_nav_menu_placeholder ) - 1 : -1;
+						$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? (int) $_nav_menu_placeholder - 1 : -1;
 						array_unshift(
 							$posts, (object) array(
 								'front_or_home' => true,
@@ -561,7 +561,7 @@ function wp_nav_menu_item_post_type_meta_box( $object, $box ) {
 				$post_type = get_post_type_object( $post_type_name );
 
 				if ( $post_type->has_archive ) {
-					$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? intval( $_nav_menu_placeholder ) - 1 : -1;
+					$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? (int) $_nav_menu_placeholder - 1 : -1;
 					array_unshift(
 						$posts, (object) array(
 							'ID'           => 0,

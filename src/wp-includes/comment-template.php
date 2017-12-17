@@ -2133,7 +2133,7 @@ function wp_list_comments( $args = array(), $comments = null ) {
 		}
 	}
 	// Validation check
-	$r['page'] = intval( $r['page'] );
+	$r['page'] = (int) $r['page'];
 	if ( 0 == $r['page'] && 0 != $r['per_page'] ) {
 		$r['page'] = 1;
 	}
