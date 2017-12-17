@@ -102,7 +102,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 
 		$args = array(
 			'number'     => (int) $per_page,
-			'offset'     => (int) ( ( $pagenum - 1 ) * $per_page ),
+			'offset'     => (int) ( $pagenum - 1 ) * $per_page,
 			'network_id' => get_current_network_id(),
 		);
 
