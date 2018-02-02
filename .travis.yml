@@ -61,26 +61,9 @@ before_script:
     export PATH=`composer config --list --global | grep '\[home\]' | { read a; echo "${a#* }/vendor/bin:$PATH"; }`
   fi
 - |
-  # Install the specified version of PHPUnit depending on the PHP version:
+  # Install appropriate version of PHPUnit, allowing Composer to choose.
   if [[ "$WP_TRAVISCI" == "travis:phpunit" ]]; then
-    case "$TRAVIS_PHP_VERSION" in
-      7.2|7.1|7.0|nightly)
-        echo "Using PHPUnit 6.x"
-        composer global require "phpunit/phpunit:^6"
-        ;;
-      5.6|5.5|5.4|5.3)
-        echo "Using PHPUnit 4.x"
-        composer global require "phpunit/phpunit:^4"
-        ;;
-      5.2)
-        # Do nothing, use default PHPUnit 3.6.x
-        echo "Using default PHPUnit, hopefully 3.6"
-        ;;
-      *)
-        echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
-        exit 1
-        ;;
-    esac
+    composer global require phpunit/phpunit
   fi
 - npm --version
 - node --version
