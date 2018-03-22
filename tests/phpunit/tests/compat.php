@@ -186,11 +186,52 @@ EOT;
 		$this->assertEquals( '["foo"]', $json->encodeUnsafe( array( 'foo' ) ) );
 		$this->assertEquals( array( 'foo' ), $json->decode( '["foo"]' ) );
 	}
+
+	function test_is_countable_availability() {
+		$this->assertTrue( function_exists( 'is_countable' ) );
+	}
+
+	/**
+	 * @dataProvider countable_variable_test_data
+	 */
+	function test_is_countable_functionality($variable, $is_countable) {
+		$this->assertEquals( is_countable( $variable ), $is_countable );
+	}
+
+	/**
+	 * Data provider for test_is_countable_functionality test. First array value
+	 * is the variable, and the second value is the expected return value of the
+	 * PHP 7.3's is_countable function.
+	 * @return array test data.
+	 */
+	public function countable_variable_test_data() {
+		return array(
+			array( true, false ),
+			array( new stdClass(), false ),
+			array( new ArrayIteratorFake(), true ),
+			array( new CountableFake(), true ),
+			array( 16, false ),
+			array( null, false ),
+			array( array( 1, 2, 3 ), true ),
+			array( (array) 1, true ),
+			array( (object) array( 'foo', 'bar', 'baz' ), false ),
+		);
+	}
 }
 
 /* used in test_mb_substr_phpcore */
 class classA {
 	public function __toString() {
 		return 'Class A object';
+	}
+}
+
+class ArrayIteratorFake extends ArrayIterator {
+
+}
+
+class CountableFake implements Countable {
+	public function count() {
+		return 16;
 	}
 }
