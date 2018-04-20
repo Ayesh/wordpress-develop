@@ -210,7 +210,7 @@ function get_plugin_files( $plugin ) {
 		 *
 		 * @since 4.9.0
 		 *
-		 * @param array $exclusions Array of excluded directories and files.
+		 * @param string[] $exclusions Array of excluded directories and files.
 		 */
 		$exclusions = (array) apply_filters( 'plugin_files_exclusions', array( 'CVS', 'node_modules', 'vendor', 'bower_components' ) );
 
@@ -2013,4 +2013,23 @@ function wp_clean_plugins_cache( $clear_update_cache = true ) {
 function plugin_sandbox_scrape( $plugin ) {
 	wp_register_plugin_realpath( WP_PLUGIN_DIR . '/' . $plugin );
 	include( WP_PLUGIN_DIR . '/' . $plugin );
+}
+
+/**
+ * Helper function for adding plugin specific information to the postbox shown when editing the privacy policy.
+ *
+ * Intended for use with the `'admin_init'` action.
+ *
+ * @since 4.9.6
+ *
+ * @param string $plugin_name The plugin'as name. Will be shown in the privacy policy metabox.
+ * @param string $policy_text The content that should appear in the site's privacy policy.
+ *                            For more information see the Plugins Handbook https://developer.wordpress.org/plugins/. 
+ */
+function wp_add_privacy_policy_content( $plugin_name, $policy_text ) {
+	if ( ! class_exists( 'WP_Privacy_Policy_Content' ) ) {
+		require_once( ABSPATH . 'wp-admin/includes/misc.php' );
+	}
+
+	WP_Privacy_Policy_Content::add( $plugin_name, $policy_text );
 }
