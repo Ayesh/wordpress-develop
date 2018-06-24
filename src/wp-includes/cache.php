@@ -735,24 +735,5 @@ class WP_Object_Cache {
 	public function __construct() {
 		$this->multisite   = is_multisite();
 		$this->blog_prefix = $this->multisite ? get_current_blog_id() . ':' : '';
-
-		/**
-		 * @todo This should be moved to the PHP4 style constructor, PHP5
-		 * already calls __destruct()
-		 */
-		register_shutdown_function( array( $this, '__destruct' ) );
-	}
-
-	/**
-	 * Saves the object cache before object is completely destroyed.
-	 *
-	 * Called upon object destruction, which should be when PHP ends.
-	 *
-	 * @since 2.0.8
-	 *
-	 * @return true Always returns true.
-	 */
-	public function __destruct() {
-		return true;
 	}
 }
