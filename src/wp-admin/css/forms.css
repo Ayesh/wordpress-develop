@@ -166,10 +166,6 @@ input[type="search"]::-webkit-search-decoration {
 	display: none;
 }
 
-.ie8 input[type="password"] {
-	font-family: sans-serif;
-}
-
 textarea,
 input,
 select,
@@ -413,14 +409,6 @@ input[type="number"].tiny-text {
 	float: left;
 	margin-right: 6px;
 	max-width: 200px;
-}
-
-.ie8 .tablenav .actions select {
-	width: 155px;
-}
-
-.ie8 .tablenav .actions select#cat {
-	width: 200px;
 }
 
 #timezone_string option {

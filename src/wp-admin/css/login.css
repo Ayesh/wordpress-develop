@@ -40,10 +40,6 @@ a:focus {
 		0 0 2px 1px rgba(30, 140, 190, .8);
 }
 
-.ie8 a:focus {
-	outline: #5b9dd9 solid 1px;
-}
-
 p {
 	line-height: 1.5;
 }
@@ -217,11 +213,6 @@ p {
 .login input[type="text"],
 .login form input[type="checkbox"] {
 	background: #fbfbfb;
-}
-
-.ie7 .login form .input,
-.ie8 .login form .input {
-	font-family: sans-serif;
 }
 
 .login-action-rp input[type="text"] {
