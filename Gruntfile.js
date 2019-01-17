@@ -404,7 +404,7 @@ module.exports = function(grunt) {
 		},
 		cssmin: {
 			options: {
-				compatibility: 'ie7'
+				compatibility: 'ie9'
 			},
 			core: {
 				expand: true,
@@ -669,7 +669,7 @@ module.exports = function(grunt) {
 		uglify: {
 			options: {
 				ASCIIOnly: true,
-				screwIE8: false
+				screwIE8: true
 			},
 			core: {
 				expand: true,
