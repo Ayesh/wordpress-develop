@@ -647,7 +647,7 @@ switch ( $action ) {
 		if ( isset( $_GET['key'] ) ) {
 			$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
 			setcookie( $rp_cookie, $value, 0, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
-			wp_safe_redirect( remove_query_arg( array( 'key', 'login' ) ) );
+			wp_safe_redirect( site_url( remove_query_arg( array( 'key', 'login' ) ) ) );
 			exit;
 		}
 
