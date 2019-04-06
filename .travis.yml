@@ -58,12 +58,8 @@ before_script:
   # Export Composer's global bin dir to PATH, but not on PHP 5.2:
   composer config --list --global
   export PATH=`composer config --list --global | grep '\[home\]' | { read a; echo "${a#* }/vendor/bin:$PATH"; }`
-- |
-  # We only need to run composer install on the code formatting job.
-  if [[ "$WP_TRAVISCI" == "travis:format" ]]; then
-    composer --version
-    travis_retry composer install
-  fi
+- composer --version
+- travis_retry composer install
 - npm --version
 - node --version
 - nvm install 10.13.0
