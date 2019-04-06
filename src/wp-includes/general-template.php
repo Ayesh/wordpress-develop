@@ -154,6 +154,17 @@ function get_template_part( $slug, $name = null ) {
 
 	$templates[] = "{$slug}.php";
 
+	/**
+	 * Fires before a template part is loaded.
+	 *
+	 * @since 5.2.0
+	 *
+	 * @param string   $slug      The slug name for the generic template.
+	 * @param string   $name      The name of the specialized template.
+	 * @param string[] $templates Array of template files to search for, in order.
+	 */
+	do_action( 'get_template_part', $slug, $name, $templates );
+
 	locate_template( $templates, true, false );
 }
 
@@ -948,8 +959,7 @@ function get_custom_logo( $blog_id = 0 ) {
 	// We have a logo. Logo is go.
 	if ( $custom_logo_id ) {
 		$custom_logo_attr = array(
-			'class'    => 'custom-logo',
-			'itemprop' => 'logo',
+			'class' => 'custom-logo',
 		);
 
 		/*
@@ -966,7 +976,7 @@ function get_custom_logo( $blog_id = 0 ) {
 		 * it because wp_get_attachment_image() already adds the alt attribute.
 		 */
 		$html = sprintf(
-			'<a href="%1$s" class="custom-logo-link" rel="home" itemprop="url">%2$s</a>',
+			'<a href="%1$s" class="custom-logo-link" rel="home">%2$s</a>',
 			esc_url( home_url( '/' ) ),
 			wp_get_attachment_image( $custom_logo_id, 'full', false, $custom_logo_attr )
 		);
@@ -2750,6 +2760,22 @@ function wp_footer() {
 	 * @since 1.5.1
 	 */
 	do_action( 'wp_footer' );
+}
+
+/**
+ * Fire the wp_body_open action.
+ *
+ * * See {@see 'wp_body_open'}.
+ *
+ * @since 5.2.0
+ */
+function wp_body_open() {
+	/**
+	 * Triggered after the opening <body> tag.
+	 *
+	 * @since 5.2.0
+	 */
+	do_action( 'wp_body_open' );
 }
 
 /**

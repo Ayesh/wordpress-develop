@@ -4,27 +4,20 @@
  * @output wp-admin/js/site-health.js
  */
 
-/* global ajaxurl, SiteHealth, wp */
+/* global ajaxurl, ClipboardJS, SiteHealth, wp */
 
 jQuery( document ).ready( function( $ ) {
 
 	var data;
 
+	var clipboard = new ClipboardJS( '.site-health-copy-buttons .copy-button' );
+
 	// Debug information copy section.
-	$( '.health-check-copy-field' ).click( function( e ) {
-		var $textarea = $( '#system-information-' + $( this ).data( 'copy-field' ) + '-copy-field' ),
-			$wrapper = $( this ).closest( 'div' );
+	clipboard.on( 'success', function( e ) {
+		var $wrapper = $( e.trigger ).closest( 'div' );
+		$( '.success', $wrapper ).addClass( 'visible' );
 
-		e.preventDefault();
-
-		$textarea.select();
-
-		if ( document.execCommand( 'copy' ) ) {
-			$( '.copy-field-success', $wrapper ).addClass( 'visible' );
-			$( this ).focus();
-
-			wp.a11y.speak( SiteHealth.string.site_info_copied );
-		}
+		wp.a11y.speak( SiteHealth.string.site_info_copied );
 	} );
 
 	// Accordion handling in various areas.
@@ -37,14 +30,6 @@ jQuery( document ).ready( function( $ ) {
 		} else {
 			$( this ).attr( 'aria-expanded', 'true' );
 			$( '#' + $( this ).attr( 'aria-controls' ) ).attr( 'hidden', false );
-		}
-	} );
-
-	$( '.health-check-accordion' ).on( 'keyup', '.health-check-accordion-trigger', function( e ) {
-		if ( '38' === e.keyCode.toString() ) {
-			$( '.health-check-accordion-trigger', $( this ).closest( 'dt' ).prevAll( 'dt' ) ).focus();
-		} else if ( '40' === e.keyCode.toString() ) {
-			$( '.health-check-accordion-trigger', $( this ).closest( 'dt' ).nextAll( 'dt' ) ).focus();
 		}
 	} );
 
@@ -82,18 +67,19 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function RecalculateProgression() {
 		var r, c, pct;
-		var $progressBar = $( '#progressbar' );
-		var $circle = $( '#progressbar svg #bar' );
+		var $progress = $( '.site-health-progress' );
+		var $progressCount = $progress.find( '.site-health-progress-count' );
+		var $circle = $( '.site-health-progress svg #bar' );
 		var totalTests = parseInt( SiteHealth.site_status.issues.good, 0 ) + parseInt( SiteHealth.site_status.issues.recommended, 0 ) + ( parseInt( SiteHealth.site_status.issues.critical, 0 ) * 1.5 );
 		var failedTests = parseInt( SiteHealth.site_status.issues.recommended, 0 ) + ( parseInt( SiteHealth.site_status.issues.critical, 0 ) * 1.5 );
 		var val = 100 - Math.ceil( ( failedTests / totalTests ) * 100 );
 
 		if ( 0 === totalTests ) {
-			$progressBar.addClass( 'hidden' );
+			$progress.addClass( 'hidden' );
 			return;
 		}
 
-		$progressBar.removeClass( 'loading' );
+		$progress.removeClass( 'loading' );
 
 		r = $circle.attr( 'r' );
 		c = Math.PI * ( r * 2 );
@@ -130,8 +116,7 @@ jQuery( document ).ready( function( $ ) {
 			$( '.site-status-has-issues' ).addClass( 'hide' );
 		}
 
-		$progressBar.attr( 'data-pct', val );
-		$progressBar.attr( 'aria-valuenow', val );
+		$progressCount.text( val + '%' );
 
 		$.post(
 			ajaxurl,
