@@ -642,27 +642,27 @@ module.exports = function(grunt) {
 		},
 		phpunit: {
 			'default': {
-				cmd: 'phpunit',
+				cmd: 'vendor/bin/phpunit',
 				args: ['--verbose', '-c', 'phpunit.xml.dist']
 			},
 			ajax: {
-				cmd: 'phpunit',
+				cmd: 'vendor/bin/phpunit',
 				args: ['--verbose', '-c', 'phpunit.xml.dist', '--group', 'ajax']
 			},
 			multisite: {
-				cmd: 'phpunit',
+				cmd: 'vendor/bin/phpunit',
 				args: ['--verbose', '-c', 'tests/phpunit/multisite.xml']
 			},
 			'ms-files': {
-				cmd: 'phpunit',
+				cmd: 'vendor/bin/phpunit',
 				args: ['--verbose', '-c', 'tests/phpunit/multisite.xml', '--group', 'ms-files']
 			},
 			'external-http': {
-				cmd: 'phpunit',
+				cmd: 'vendor/bin/phpunit',
 				args: ['--verbose', '-c', 'phpunit.xml.dist', '--group', 'external-http']
 			},
 			'restapi-jsclient': {
-				cmd: 'phpunit',
+				cmd: 'vendor/bin/phpunit',
 				args: ['--verbose', '-c', 'phpunit.xml.dist', '--group', 'restapi-jsclient']
 			}
 		},
