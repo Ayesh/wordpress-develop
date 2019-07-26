@@ -159,7 +159,7 @@ function wp_ajax_ajax_tag_search() {
 		)
 	);
 
-	echo join( $results, "\n" );
+	echo join( "\n", $results );
 	wp_die();
 }
 
