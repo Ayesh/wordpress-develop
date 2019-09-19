@@ -2162,7 +2162,7 @@ function embed_wmedia(width, height, link) {
 	 */
 	public static function get_build()
 	{
-		$root = dirname(dirname(__FILE__));
+		$root = dirname( __DIR__);
 		if (file_exists($root . '/.git/index'))
 		{
 			return filemtime($root . '/.git/index');
@@ -2179,9 +2179,9 @@ function embed_wmedia(width, height, link) {
 			}
 			return $time;
 		}
-		elseif (file_exists(dirname(__FILE__) . '/Core.php'))
+		elseif (file_exists( __DIR__ . '/Core.php'))
 		{
-			return filemtime(dirname(__FILE__) . '/Core.php');
+			return filemtime( __DIR__ . '/Core.php');
 		}
 		else
 		{

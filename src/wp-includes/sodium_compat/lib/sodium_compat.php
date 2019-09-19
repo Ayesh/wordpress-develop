@@ -820,5 +820,5 @@ if (!is_callable('\\Sodium\\randombytes_random16')) {
 }
 
 if (!defined('\\Sodium\\CRYPTO_AUTH_BYTES')) {
-    require_once dirname(__FILE__) . '/constants.php';
+    require_once __DIR__ . '/constants.php';
 }

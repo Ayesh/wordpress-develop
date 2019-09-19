@@ -48,7 +48,7 @@ class Text_Diff {
         }
 
         // WP #7391
-        require_once dirname(__FILE__).'/Diff/Engine/' . $engine . '.php';
+        require_once __DIR__ . '/Diff/Engine/' . $engine . '.php';
         $class = 'Text_Diff_Engine_' . $engine;
         $diff_engine = new $class();
 
