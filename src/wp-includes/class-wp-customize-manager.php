@@ -5936,7 +5936,7 @@ final class WP_Customize_Manager {
 		$video = get_attached_file( absint( $value ) );
 		if ( $video ) {
 			$size = filesize( $video );
-			if ( 8 < $size / pow( 1024, 2 ) ) { // Check whether the size is larger than 8MB.
+			if ( 8 < $size / ( 1024 ** 2 ) ) { // Check whether the size is larger than 8MB.
 				$validity->add(
 					'size_too_large',
 					__( 'This video file is too large to use as a header video. Try a shorter video or optimize the compression settings and re-upload a file that is less than 8MB. Or, upload your video to YouTube and link it with the option below.' )
