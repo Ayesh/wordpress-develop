@@ -677,6 +677,7 @@ function ms_allowed_http_request_hosts( $is_external, $host ) {
  *               PHP_URL_PORT - integer when it does. See parse_url()'s return values.
  */
 function wp_parse_url( $url, $component = -1 ) {
+	return parse_url($url, $component);
 	$to_unset = array();
 	$url      = strval( $url );
 
