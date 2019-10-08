@@ -651,21 +651,19 @@ function ms_allowed_http_request_hosts( $is_external, $host ) {
  * A wrapper for PHP's parse_url() function that handles consistency in the return
  * values across PHP versions.
  *
- * PHP 5.4.7 expanded parse_url()'s ability to handle non-absolute url's, including
- * schemeless and relative url's with :// in the path. This function works around
- * those limitations providing a standard output on PHP 5.2~5.4+.
+ * Until PHP 7.0.22 (70022), a colon in the query parameter was detected as a port
+ * number. We work around it in older versions.
  *
  * Secondly, across various PHP versions, schemeless URLs starting containing a ":"
  * in the query are being handled inconsistently. This function works around those
  * differences as well.
  *
- * Error suppression is used as prior to PHP 5.3.3, an E_WARNING would be generated
- * when URL parsing failed.
- *
  * @since 4.4.0
  * @since 4.7.0 The `$component` parameter was added for parity with PHP's `parse_url()`.
+ * @deprecated 5.3.0 Directly use `parse_url`.
  *
  * @link https://secure.php.net/manual/en/function.parse-url.php
+ * @link https://bugs.php.net/bug.php?id=74780
  *
  * @param string $url       The URL to parse.
  * @param int    $component The specific component to retrieve. Use one of the PHP
@@ -677,7 +675,11 @@ function ms_allowed_http_request_hosts( $is_external, $host ) {
  *               PHP_URL_PORT - integer when it does. See parse_url()'s return values.
  */
 function wp_parse_url( $url, $component = -1 ) {
-	return parse_url($url, $component);
+  // PHP 7.0.22 and later can correctly parse URLs. See https://bugs.php.net/bug.php?id=74780
+	if (PHP_VERSION >= 70022) {
+		return parse_url($url, $component);
+	}
+
 	$to_unset = array();
 	$url      = strval( $url );
 
@@ -690,7 +692,7 @@ function wp_parse_url( $url, $component = -1 ) {
 		$url        = 'placeholder://placeholder' . $url;
 	}
 
-	$parts = @parse_url( $url );
+	$parts = parse_url( $url );
 
 	if ( false === $parts ) {
 		// Parsing failure.
