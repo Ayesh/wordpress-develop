@@ -407,4 +407,19 @@ class Tests_Mail extends WP_UnitTestCase {
 		$this->assertEquals( 'wp_mail_failed', $call_args[0]->get_error_code() );
 		$this->assertEquals( $expected_error_data, $call_args[0]->get_error_data() );
 	}
+
+	/**
+	 * Test for bailing out of wp_mail() early.
+	 *
+	 * @ticket 35069
+	 */
+	public function test_wp_mail_bail_early() {
+		$this->assertTrue( wp_mail( WP_TESTS_EMAIL, 'Foo', 'Bar' ) );
+
+		add_filter( 'pre_wp_mail', '__return_false' );
+		$result = wp_mail( WP_TESTS_EMAIL, 'Foo', 'Bar' );
+		remove_filter( 'pre_wp_mail', '__return_false' );
+
+		$this->assertFalse( $result );
+	}
 }

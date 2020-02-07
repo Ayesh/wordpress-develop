@@ -180,6 +180,24 @@ if ( ! function_exists( 'wp_mail' ) ) :
 		 */
 		$atts = apply_filters( 'wp_mail', compact( 'to', 'subject', 'message', 'headers', 'attachments' ) );
 
+		/**
+		* Filter whether to preempt sending an email.
+		*
+		* Passing a non-null value will effectively short-circuit {@see wp_mail()},
+		* returning that value instead.
+		*
+		* @since 5.0.0
+		*
+		* @param null|bool $return Short-circuit return value.
+		* @param array     $atts   A compacted array of `wp_mail()` arguments, including the "to" email,
+		*                          subject, message, headers, and attachments values.
+		*/
+		$pre_wp_mail = apply_filters( 'pre_wp_mail', null, $atts );
+
+		if ( null !== $pre_wp_mail ) {
+			return $pre_wp_mail;
+		}
+
 		if ( isset( $atts['to'] ) ) {
 			$to = $atts['to'];
 		}
