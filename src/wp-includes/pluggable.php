@@ -6,8 +6,6 @@
  * @package WordPress
  */
 
-use PHPMailer\PHPMailer\PHPMailer;
-
 if ( ! function_exists( 'wp_set_current_user' ) ) :
 	/**
 	 * Changes the current user by ID or name.
@@ -160,7 +158,7 @@ if ( ! function_exists( 'wp_mail' ) ) :
 	 *
 	 * @since 1.2.1
 	 *
-	 * @global PHPMailer $phpmailer
+	 * @global PHPMailer\PHPMailer\PHPMailer $phpmailer
 	 *
 	 * @param string|array $to          Array or comma-separated list of email addresses to send message.
 	 * @param string       $subject     Email subject
@@ -212,11 +210,11 @@ if ( ! function_exists( 'wp_mail' ) ) :
 		global $phpmailer;
 
 		// (Re)create it, if it's gone missing.
-		if ( ! ( $phpmailer instanceof PHPMailer ) ) {
+		if ( ! ( $phpmailer instanceof PHPMailer\PHPMailer\PHPMailer ) ) {
 			require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
 			require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
 			require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
-			$phpmailer = new PHPMailer( true );
+			$phpmailer = new PHPMailer\PHPMailer\PHPMailer( true );
 		}
 
 		// Headers.
