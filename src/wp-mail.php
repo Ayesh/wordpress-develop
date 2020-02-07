@@ -29,7 +29,8 @@ if ( 'mail.example.com' === $mailserver_url || empty( $mailserver_url ) ) {
 do_action( 'wp-mail.php' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 
 /** Get the POP3 class with which to access the mailbox. */
-require_once ABSPATH . WPINC . '/class-pop3.php';
+require_once ABSPATH . WPINC . '/PHPMailer/POP3.php';
+require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
 
 /** Only check at this interval for new messages. */
 if ( ! defined( 'WP_MAIL_INTERVAL' ) ) {
@@ -48,7 +49,7 @@ $time_difference = get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
 
 $phone_delim = '::';
 
-$pop3 = new POP3();
+$pop3 = new PHPMailer\PHPMailer\POP3();
 
 if ( ! $pop3->connect( get_option( 'mailserver_url' ), get_option( 'mailserver_port' ) ) || ! $pop3->user( get_option( 'mailserver_login' ) ) ) {
 	wp_die( esc_html( $pop3->ERROR ) );
