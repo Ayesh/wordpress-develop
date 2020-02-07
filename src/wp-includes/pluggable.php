@@ -469,7 +469,7 @@ if ( ! function_exists( 'wp_mail' ) ) :
 			foreach ( $attachments as $attachment ) {
 				try {
 					$phpmailer->addAttachment( $attachment );
-				} catch ( phpmailerException $e ) {
+				} catch ( PHPMailer\PHPMailer\Exception $e ) {
 					continue;
 				}
 			}
