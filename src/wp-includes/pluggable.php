@@ -405,7 +405,7 @@ if ( ! function_exists( 'wp_mail' ) ) :
 							$phpmailer->addReplyTo( $address, $recipient_name );
 							break;
 					}
-				} catch ( phpmailerException $e ) {
+				} catch ( PHPMailer\PHPMailer\Exception $e ) {
 					continue;
 				}
 			}
