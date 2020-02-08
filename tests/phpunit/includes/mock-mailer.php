@@ -18,7 +18,7 @@ class MockPHPMailer extends PHPMailer\PHPMailer\PHPMailer {
 			'to'      => $this->to,
 			'cc'      => $this->cc,
 			'bcc'     => $this->bcc,
-			'header'  => $this->MIMEHeader . $this->mailHeader,
+			'header'  => iconv_mime_decode_headers( $this->MIMEHeader . $this->mailHeader ),
 			'subject' => $this->Subject,
 			'body'    => $this->MIMEBody,
 		);
