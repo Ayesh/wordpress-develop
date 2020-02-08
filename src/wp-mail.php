@@ -29,8 +29,7 @@ if ( 'mail.example.com' === $mailserver_url || empty( $mailserver_url ) ) {
 do_action( 'wp-mail.php' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 
 /** Get the POP3 class with which to access the mailbox. */
-require_once ABSPATH . WPINC . '/PHPMailer/POP3.php';
-require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
+require_once ABSPATH . WPINC . '/class-pop3.php';
 
 /** Only check at this interval for new messages. */
 if ( ! defined( 'WP_MAIL_INTERVAL' ) ) {
@@ -49,7 +48,7 @@ $time_difference = get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
 
 $phone_delim = '::';
 
-$pop3 = new PHPMailer\PHPMailer\POP3();
+$pop3 = new POP3();
 
 if ( ! $pop3->connect( get_option( 'mailserver_url' ), get_option( 'mailserver_port' ) ) || ! $pop3->user( get_option( 'mailserver_login' ) ) ) {
 	wp_die( esc_html( $pop3->ERROR ) );
@@ -248,17 +247,17 @@ for ( $i = 1; $i <= $count; $i++ ) {
 	if ( ! $pop3->delete( $i ) ) {
 		echo '<p>' . sprintf(
 			/* translators: %s: POP3 error. */
-			__( 'Oops: %s' ),
-			esc_html( $pop3->ERROR )
-		) . '</p>';
+				__( 'Oops: %s' ),
+				esc_html( $pop3->ERROR )
+			) . '</p>';
 		$pop3->reset();
 		exit;
 	} else {
 		echo '<p>' . sprintf(
 			/* translators: %s: The message ID. */
-			__( 'Mission complete. Message %s deleted.' ),
-			'<strong>' . $i . '</strong>'
-		) . '</p>';
+				__( 'Mission complete. Message %s deleted.' ),
+				'<strong>' . $i . '</strong>'
+			) . '</p>';
 	}
 }
 
