@@ -81,6 +81,7 @@ class Tests_Mail extends WP_UnitTestCase {
 
 		// We need some better assertions here but these catch the failure for now.
 		$this->assertEquals( $body, $mailer->get_sent()->body );
+		var_dump(iconv_mime_decode ( $mailer->get_sent()->header ));
 		$this->assertTrue( strpos( iconv_mime_decode ( $mailer->get_sent()->header ), 'boundary="----=_Part_4892_25692638.1192452070893"' ) > 0 );
 		$this->assertTrue( strpos( $mailer->get_sent()->header, 'charset=' ) > 0 );
 	}
