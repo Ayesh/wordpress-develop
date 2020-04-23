@@ -1844,7 +1844,10 @@ function wp_get_unapproved_comment_author_email() {
 		$comment_id = (int) $_GET['unapproved'];
 		$comment    = get_comment( $comment_id );
 
-		if ( $comment && hash_equals( $_GET['moderation-hash'], wp_hash( $comment->comment_date_gmt ) ) ) {
+		if ( $comment
+				 && $_SERVER['REMOTE_ADDR'] === $comment->comment_author_IP
+				 && hash_equals( $_GET['moderation-hash'], wp_hash( $comment->comment_date_gmt ) )
+		) {
 			$commenter_email = $comment->comment_author_email;
 		}
 	}
