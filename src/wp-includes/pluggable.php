@@ -461,7 +461,7 @@ if ( ! function_exists( 'wp_mail' ) ) :
 			}
 
 			if ( false !== stripos( $content_type, 'multipart' ) && ! empty( $boundary ) ) {
-				$phpmailer->addCustomHeader( sprintf( "Content-Type: %s; boundary=\"%s\"", $content_type, $boundary ) );
+				$phpmailer->addCustomHeader( sprintf( 'Content-Type: %s; boundary="%s"', $content_type, $boundary ) );
 			}
 		}
 
