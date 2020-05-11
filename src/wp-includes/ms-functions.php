@@ -1845,16 +1845,32 @@ function get_most_recent_post_of_user( $user_id ) {
  * @return array
  */
 function check_upload_mimes( $mimes ) {
-	$site_exts  = explode( ' ', get_site_option( 'upload_filetypes', 'jpg jpeg png gif' ) );
-	$site_mimes = array();
-	foreach ( $site_exts as $ext ) {
-		foreach ( $mimes as $ext_pattern => $mime ) {
-			if ( '' != $ext && false !== strpos( $ext_pattern, $ext ) ) {
-				$site_mimes[ $ext_pattern ] = $mime;
-			}
-		}
-	}
-	return $site_mimes;
+    return filter_upload_mimes( $mimes, get_site_option( 'upload_filetypes', 'jpg jpeg png gif' ) );
+}
+
+/**
+ * A helper functions to filter a given list of mime types
+ * against a list of space-separated file extensions.
+ *
+ * File extensions are matched as a full-word. Return value
+ * will contain the passed $mimes array with only allowed
+ * values from $file_types.
+ *
+ * @param array $mimes
+ * @param $file_types
+ * @return array
+ */
+function filter_upload_mimes( array $mimes, $file_types ) {
+    $site_exts  = explode( ' ', $file_types );
+    $site_mimes = array();
+    foreach ( $site_exts as $ext ) {
+        foreach ( $mimes as $ext_pattern => $mime ) {
+            if ( '' != $ext && preg_match('/\b'. preg_quote($ext, '/') .'\b/i', $ext_pattern)) {
+                $site_mimes[ $ext_pattern ] = $mime;
+            }
+        }
+    }
+    return $site_mimes;
 }
 
 /**
