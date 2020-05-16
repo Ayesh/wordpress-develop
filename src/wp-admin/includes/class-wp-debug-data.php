@@ -356,6 +356,50 @@ class WP_Debug_Data {
 			),
 		);
 
+		$info['wp-uploads'] = array(
+			'label'       => __( 'File upload settings' ),
+			'description' => __( 'Shows whether file uploads are enabled and restrictions imposed.' ),
+			'fields'      => array(),
+		);
+		if ( ! function_exists( 'ini_get' ) ) {
+			$info['wp-uploads']['fields']['ini_get'] = array(
+				'label' => __( 'File upload settings' ),
+				'value' => sprintf(
+				/* translators: %s: ini_get() */
+					__( 'Unable to determine some settings, as the %s function has been disabled.' ),
+					'ini_get()'
+				),
+				'debug' => 'ini_get() is disabled',
+			);
+		} else {
+			$post_max_size    = static::parseIniSize( ini_get( 'post_max_size' ) );
+			$upload_max_size  = static::parseIniSize( ini_get( 'upload_max_filesize' ) );
+			$max_file_uploads = (int) ini_get( 'max_file_uploads' );
+			$effective        = min( $post_max_size, $upload_max_size );
+
+			$info['wp-uploads']['fields']['file_uploads']        = array(
+				'label' => __( 'File uploads' ),
+				'value' => ini_get( 'file_uploads' ) === '1' ? __( 'Enabled' ) : __( 'Disabled' ),
+				'debug' => 'ini_get() is disabled',
+			);
+			$info['wp-uploads']['fields']['post_max_size']       = array(
+				'label' => __( 'Max size of post data allowed' ),
+				'value' => size_format( $post_max_size ),
+			);
+			$info['wp-uploads']['fields']['upload_max_filesize'] = array(
+				'label' => __( 'Max size of an uploaded file' ),
+				'value' => size_format( $upload_max_size ),
+			);
+			$info['wp-uploads']['fields']['upload_max']          = array(
+				'label' => __( 'Max effective file size' ),
+				'value' => size_format( $effective ),
+			);
+			$info['wp-uploads']['fields']['max_file_uploads']    = array(
+				'label' => __( 'Max number of files allowed' ),
+				'value' => number_format( $max_file_uploads ),
+			);
+		}
+
 		// Conditionally add debug information for multisite setups.
 		if ( is_multisite() ) {
 			$network_query = new WP_Network_Query();
@@ -1359,5 +1403,21 @@ class WP_Debug_Data {
 		}
 
 		return $all_sizes;
+	}
+
+	protected static function parseIniSize( $size_string ) {
+		$size_string = trim( $size_string );
+		$last        = strtolower( substr( $size_string, - 1 ) );
+		$value       = intval( $size_string );
+		switch ( $last ) {
+			case 'g':
+				return $value * GB_IN_BYTES;
+			case 'm':
+				return $value * MB_IN_BYTES;
+			case 'k':
+				return $value * KB_IN_BYTES;
+			default:
+				return $value;
+		}
 	}
 }
