@@ -15,18 +15,6 @@ define( 'XMLRPC_REQUEST', true );
 // Some browser-embedded clients send cookies. We don't want them.
 $_COOKIE = array();
 
-// $HTTP_RAW_POST_DATA was removed in PHP 7.0.
-// phpcs:disable PHPCompatibility.Variables.RemovedPredefinedGlobalVariables.http_raw_post_dataDeprecatedRemoved -- Backfill.
-if ( ! isset( $HTTP_RAW_POST_DATA ) ) {
-	$HTTP_RAW_POST_DATA = file_get_contents( 'php://input' );
-}
-
-// Fix for mozBlog and other cases where '<?xml' isn't on the very first line.
-if ( isset( $HTTP_RAW_POST_DATA ) ) {
-	$HTTP_RAW_POST_DATA = trim( $HTTP_RAW_POST_DATA );
-}
-// phpcs:enable
-
 /** Include the bootstrap for setting up WordPress environment */
 require_once __DIR__ . '/wp-load.php';
 
