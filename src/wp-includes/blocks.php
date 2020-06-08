@@ -188,7 +188,7 @@ function strip_core_block_namespace( $block_name = null ) {
  * @param string $content    Block save content.
  * @return string Comment-delimited block content.
  */
-function get_comment_delimited_block_content( $block_name = null, $block_attributes, $block_content ) {
+function get_comment_delimited_block_content( $block_name = null, $block_attributes = array(), $block_content = '' ) {
 	if ( is_null( $block_name ) ) {
 		return $block_content;
 	}
