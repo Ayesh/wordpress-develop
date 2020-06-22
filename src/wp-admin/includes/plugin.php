@@ -2144,17 +2144,20 @@ function user_can_access_admin_page() {
  * See the {@see 'allowed_options'} filter.
  *
  * @since 2.7.0
+ * @since 5.5.0 `$new_whitelist_options` global variable has been renamed to `$new_allowlist_options`.
+ *              For compatibility with existing code, the old variable is now a reference to the new one.
+ *              Please consider writing more inclusive code.
  *
- * @global array $new_whitelist_options
+ * @global array $new_allowlist_options
  *
  * @param array $options
  * @return array
  */
 function option_update_filter( $options ) {
-	global $new_whitelist_options;
+	global $new_allowlist_options;
 
-	if ( is_array( $new_whitelist_options ) ) {
-		$options = add_option_allowed_list( $new_whitelist_options, $options );
+	if ( is_array( $new_allowlist_options ) ) {
+		$options = add_option_allowed_list( $new_allowlist_options, $options );
 	}
 
 	return $options;
