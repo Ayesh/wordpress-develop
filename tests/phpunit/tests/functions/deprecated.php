@@ -140,6 +140,7 @@ class Tests_Functions_Deprecated extends WP_UnitTestCase {
 	 *
 	 * @ticket 6821
 	 * @expectedDeprecated wp_save_image_file
+	 * @requires extension gd
 	 */
 	public function test_wp_save_image_file_deprecated_with_gd_resource() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
@@ -163,6 +164,7 @@ class Tests_Functions_Deprecated extends WP_UnitTestCase {
 	 * Tests that wp_save_image_file() doesn't have a deprecated argument when passed a WP_Image_Editor.
 	 *
 	 * @ticket 6821
+	 * @requires extension gd
 	 */
 	public function test_wp_save_image_file_not_deprecated_with_wp_image_editor() {
 		if ( ! function_exists( 'imagejpeg' ) ) {

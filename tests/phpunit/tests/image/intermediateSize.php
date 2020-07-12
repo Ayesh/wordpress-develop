@@ -28,6 +28,9 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertFalse( $image );
 	}
 
+	/**
+	 * @requires extension gd
+	 */
 	function test_make_intermediate_size_width() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
 			$this->fail( 'jpeg support unavailable' );
@@ -38,6 +41,9 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertInternalType( 'array', $image );
 	}
 
+	/**
+	 * @requires extension gd
+	 */
 	function test_make_intermediate_size_height() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
 			$this->fail( 'jpeg support unavailable' );
@@ -48,6 +54,9 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 		$this->assertInternalType( 'array', $image );
 	}
 
+	/**
+	 * @requires extension gd
+	 */
 	function test_make_intermediate_size_successful() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
 			$this->fail( 'jpeg support unavailable' );
