@@ -30,7 +30,7 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 
 	function test_make_intermediate_size_width() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		$image = image_make_intermediate_size( DIR_TESTDATA . '/images/a2-small.jpg', 100, 0, false );
@@ -40,7 +40,7 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 
 	function test_make_intermediate_size_height() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		$image = image_make_intermediate_size( DIR_TESTDATA . '/images/a2-small.jpg', 0, 75, false );
@@ -50,7 +50,7 @@ class Tests_Image_Intermediate_Size extends WP_UnitTestCase {
 
 	function test_make_intermediate_size_successful() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		$image = image_make_intermediate_size( DIR_TESTDATA . '/images/a2-small.jpg', 100, 75, true );

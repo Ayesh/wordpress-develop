@@ -303,7 +303,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 
 	public function test_wp_crop_image_file() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		$file = wp_crop_image(
@@ -327,7 +327,7 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 
 	public function test_wp_crop_image_url() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		if ( ! extension_loaded( 'openssl' ) ) {

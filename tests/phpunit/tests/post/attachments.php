@@ -56,7 +56,7 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 
 	function test_insert_image_thumb_only() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		update_option( 'medium_size_w', 0 );
@@ -108,7 +108,7 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 
 	function test_insert_image_medium_sizes() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		update_option( 'medium_size_w', 400 );
@@ -167,7 +167,7 @@ class Tests_Post_Attachments extends WP_UnitTestCase {
 
 	function test_insert_image_delete() {
 		if ( ! function_exists( 'imagejpeg' ) ) {
-			$this->fail( 'jpeg support unavailable' );
+			$this->markTestSkipped( 'jpeg support unavailable' );
 		}
 
 		update_option( 'medium_size_w', 400 );
