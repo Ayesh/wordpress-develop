@@ -216,6 +216,12 @@ if ( ! function_exists( 'wp_mail' ) ) :
 			require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
 			require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
 			$phpmailer = new PHPMailer\PHPMailer\PHPMailer( true );
+
+			/**
+			 * Set email validation to use WordPress's built-in is_email().
+			 * @ticket 50720
+			 */
+			$phpmailer::$validator = 'is_email';
 		}
 
 		// Headers.
