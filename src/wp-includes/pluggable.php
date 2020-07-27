@@ -221,7 +221,9 @@ if ( ! function_exists( 'wp_mail' ) ) :
 			 * Set email validation to use WordPress's built-in is_email().
 			 * @ticket 50720
 			 */
-			$phpmailer::$validator = 'is_email';
+			$phpmailer::$validator = static function ( $email ) {
+				return is_email( $email ) !== false;
+			};
 		}
 
 		// Headers.

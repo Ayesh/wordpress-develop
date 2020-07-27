@@ -97,7 +97,9 @@ function reset_phpmailer_instance() {
 	$mailer = tests_retrieve_phpmailer_instance();
 	if ( $mailer ) {
 		$GLOBALS['phpmailer'] = $mailer = new MockPHPMailer( true );
-		$mailer::$validator = 'is_email';
+		$mailer::$validator = static function ( $email ) {
+			return is_email( $email ) !== false;
+		};
 		return true;
 	}
 
