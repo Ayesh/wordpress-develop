@@ -920,7 +920,7 @@ function file_is_displayable_image( $path ) {
  * @param string $attachment_id Attachment ID.
  * @param string $mime_type Image mime type.
  * @param string $size Optional. Image size, defaults to 'full'.
- * @return resource|false The resulting image resource on success, false on failure.
+ * @return resource|GdImage|false The resulting image resource/GdImage instance on success, false on failure.
  */
 function load_image_to_edit( $attachment_id, $mime_type, $size = 'full' ) {
 	$filepath = _load_image_to_edit_path( $attachment_id, $size );
@@ -942,15 +942,15 @@ function load_image_to_edit( $attachment_id, $mime_type, $size = 'full' ) {
 			$image = false;
 			break;
 	}
-	if ( is_resource( $image ) ) {
+	if ( is_gd_image( $image ) ) {
 		/**
 		 * Filters the current image being loaded for editing.
 		 *
 		 * @since 2.9.0
 		 *
-		 * @param resource $image         Current image.
-		 * @param string   $attachment_id Attachment ID.
-		 * @param string   $size          Image size.
+		 * @param resource|GdImage $image         Current image.
+		 * @param string           $attachment_id Attachment ID.
+		 * @param string           $size          Image size.
 		 */
 		$image = apply_filters( 'load_image_to_edit', $image, $attachment_id, $size );
 		if ( function_exists( 'imagealphablending' ) && function_exists( 'imagesavealpha' ) ) {
@@ -1060,4 +1060,19 @@ function _copy_image_file( $attachment_id ) {
 	}
 
 	return $dst_file;
+}
+
+/**
+ * Returns whether the provided argument is of a resource, or a PHP 8 GdImage object.
+ *
+ * @ticket 50833
+ * @see https://php.watch/versions/8.0/gdimage#gdimage-is-resource
+ * @since 5.6
+ *
+ * @param $image
+ *
+ * @return bool
+ */
+function is_gd_image( $image ) {
+	return is_resource( $image ) || ( is_object( $image ) && $image instanceof GdImage );
 }
