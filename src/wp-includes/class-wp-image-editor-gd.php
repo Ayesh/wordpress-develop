@@ -415,9 +415,9 @@ class WP_Image_Editor_GD extends WP_Image_Editor {
 	}
 
 	/**
-	 * @param resource|GdImage    $image
-	 * @param string|null         $filename
-	 * @param string|null         $mime_type
+	 * @param resource|GdImage $image
+	 * @param string|null      $filename
+	 * @param string|null      $mime_type
 	 * @return array|WP_Error
 	 */
 	protected function _save( $image, $filename = null, $mime_type = null ) {

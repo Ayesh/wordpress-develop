@@ -668,15 +668,24 @@ class Tests_Image_Functions extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 50833
+	 * @see \Tests_Image_Functions::test_is_gd_image_valid_types
 	 */
-	function test_is_gd_image() {
-		if ( ! extension_loaded( 'gd' ) ) {
-			$this->markTestSkipped( 'The GD PHP extension is not loaded.' );
-		}
-
-		$this->assertTrue( is_gd_image( imagecreate( 5, 5 ) ) );
+	function test_is_gd_image_invalid_types() {
 		$this->assertFalse( is_gd_image( new stdClass() ) );
 		$this->assertFalse( is_gd_image( array() ) );
 		$this->assertFalse( is_gd_image( null ) );
+
+		$handle = fopen( __FILE__, 'r' );
+		$this->assertFalse( is_gd_image( $handle ) );
+		fclose( $handle );
+	}
+
+	/**
+	 * @ticket 50833
+	 * @requires extension gd
+	 * @see \Tests_Image_Functions::test_is_gd_image_invalid_types
+	 */
+	function test_is_gd_image_valid_types() {
+		$this->assertTrue( is_gd_image( imagecreate( 5, 5 ) ) );
 	}
 }

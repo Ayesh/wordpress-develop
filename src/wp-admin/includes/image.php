@@ -1063,16 +1063,20 @@ function _copy_image_file( $attachment_id ) {
 }
 
 /**
- * Returns whether the provided argument is of a resource, or a PHP 8 GdImage object.
+ * A helper function to determine if the passed value is an acceptable type
+ * for GD extension functions.
+ * In PHP 8.0, GD extension uses GdImage objects as its primitive data type.
+ * This function checks if the passed value is either a resource of type
+ * `gd`, or a `\GdImage` object. All other types will return false.
  *
- * @ticket 50833
  * @see https://php.watch/versions/8.0/gdimage#gdimage-is-resource
- * @since 5.6
+ * @since 5.6.0
  *
- * @param $image
+ * @param mixed $image A value to check for `gd` resource or `\GdImage` object.
  *
- * @return bool
+ * @return bool True if $image is either a resource of type `gd`, or `\GdImage`
+ *  object. False otherwise.
  */
 function is_gd_image( $image ) {
-	return is_resource( $image ) || ( is_object( $image ) && $image instanceof GdImage );
+	return ( is_resource( $image ) && get_resource_type( $image ) === 'gd' ) || ( is_object( $image ) && $image instanceof GdImage );
 }
