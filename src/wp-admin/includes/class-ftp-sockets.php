@@ -172,7 +172,7 @@ class ftp_sockets extends ftp_base {
 
 	function _data_read($mode=FTP_ASCII, $fp=NULL) {
 		$NewLine=$this->_eol_code[$this->OS_local];
-		if(is_resource($fp)) $out=0;
+		if(false !== $fp) $out=0;
 		else $out="";
 		if(!$this->_passive) {
 			$this->SendMSG("Connecting to ".$this->_datahost.":".$this->_dataport);
@@ -187,7 +187,7 @@ class ftp_sockets extends ftp_base {
 		while(($block=@socket_read($this->_ftp_temp_sock, $this->_ftp_buff_size, PHP_BINARY_READ))!==false) {
 			if($block==="") break;
 			if($mode!=FTP_BINARY) $block=preg_replace("/\r\n|\r|\n/", $this->_eol_code[$this->OS_local], $block);
-			if(is_resource($fp)) $out+=fwrite($fp, $block, strlen($block));
+			if(false !== $fp) $out+=fwrite($fp, $block, strlen($block));
 			else $out.=$block;
 		}
 		return $out;
@@ -195,7 +195,7 @@ class ftp_sockets extends ftp_base {
 
 	function _data_write($mode=FTP_ASCII, $fp=NULL) {
 		$NewLine=$this->_eol_code[$this->OS_local];
-		if(is_resource($fp)) $out=0;
+		if(false !== $fp) $out=0;
 		else $out="";
 		if(!$this->_passive) {
 			$this->SendMSG("Connecting to ".$this->_datahost.":".$this->_dataport);
@@ -206,7 +206,7 @@ class ftp_sockets extends ftp_base {
 				return false;
 			}
 		}
-		if(is_resource($fp)) {
+		if(false !== $fp) {
 			while(!feof($fp)) {
 				$block=fread($fp, $this->_ftp_buff_size);
 				if(!$this->_data_write_block($mode, $block)) return false;
