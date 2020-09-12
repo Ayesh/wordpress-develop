@@ -443,7 +443,7 @@ class WP_Term_Query {
 					(array) get_terms(
 						array(
 							'taxonomy'   => reset( $taxonomies ),
-							'child_of'   => intval( $extrunk ),
+							'child_of'   => (int) $extrunk,
 							'fields'     => 'ids',
 							'hide_empty' => 0,
 						)

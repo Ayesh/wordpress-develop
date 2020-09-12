@@ -89,20 +89,18 @@ class WP_Posts_List_Table extends WP_List_Table {
 				'show_in_admin_all_list' => false,
 			)
 		);
-		$this->user_posts_count = intval(
-			$wpdb->get_var(
+		$this->user_posts_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
-					"
+						"
 			SELECT COUNT( 1 )
 			FROM $wpdb->posts
 			WHERE post_type = %s
 			AND post_status NOT IN ( '" . implode( "','", $exclude_states ) . "' )
 			AND post_author = %d
 		",
-					$post_type,
-					get_current_user_id()
+						$post_type,
+						get_current_user_id()
 				)
-			)
 		);
 
 		if ( $this->user_posts_count && ! current_user_can( $post_type_object->cap->edit_others_posts ) && empty( $_REQUEST['post_status'] ) && empty( $_REQUEST['all_posts'] ) && empty( $_REQUEST['author'] ) && empty( $_REQUEST['show_sticky'] ) ) {

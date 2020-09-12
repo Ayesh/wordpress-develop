@@ -1549,7 +1549,7 @@ function get_media_item( $attachment_id, $args = null ) {
 	global $redir_tab;
 
 	$thumb_url     = false;
-	$attachment_id = intval( $attachment_id );
+	$attachment_id = (int) $attachment_id;
 
 	if ( $attachment_id ) {
 		$thumb_url = wp_get_attachment_image_src( $attachment_id, 'thumbnail', true );
@@ -2984,9 +2984,9 @@ function media_upload_flash_bypass() {
 
 	$post = get_post();
 	if ( $post ) {
-		$browser_uploader .= '&amp;post_id=' . intval( $post->ID );
+		$browser_uploader .= '&amp;post_id=' . (int) $post->ID;
 	} elseif ( ! empty( $GLOBALS['post_ID'] ) ) {
-		$browser_uploader .= '&amp;post_id=' . intval( $GLOBALS['post_ID'] );
+		$browser_uploader .= '&amp;post_id=' . (int) $GLOBALS['post_ID'];
 	}
 
 	?>
@@ -3078,7 +3078,7 @@ function edit_form_image_editor( $post ) {
 	}
 
 	$thumb_url     = false;
-	$attachment_id = intval( $post->ID );
+	$attachment_id = (int) $post->ID;
 
 	if ( $attachment_id ) {
 		$thumb_url = wp_get_attachment_image_src( $attachment_id, array( 900, 450 ), true );

@@ -436,7 +436,7 @@ function sanitize_bookmark_field( $field, $value, $bookmark_id, $context ) {
 		$value = apply_filters( "pre_{$field}", $value );
 	} else {
 		/** This filter is documented in wp-includes/post.php */
-		$value = apply_filters( "{$field}", $value, $bookmark_id, $context );
+		$value = apply_filters( (string) ( $field ), $value, $bookmark_id, $context );
 
 		if ( 'attribute' === $context ) {
 			$value = esc_attr( $value );

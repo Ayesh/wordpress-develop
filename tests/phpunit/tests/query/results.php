@@ -905,7 +905,7 @@ class Tests_Query_Results extends WP_UnitTestCase {
 
 		$posts      = $this->q->query(
 			array(
-				'author'   => "$author_1",
+				'author'   => (string) $author_1,
 				'post__in' => array( $post_1, $post_2, $post_3, $post_4 ),
 			)
 		);

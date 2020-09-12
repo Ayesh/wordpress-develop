@@ -2594,7 +2594,7 @@ function wp_ajax_upload_attachment() {
  * @since 3.1.0
  */
 function wp_ajax_image_editor() {
-	$attachment_id = intval( $_POST['postid'] );
+	$attachment_id = (int) $_POST['postid'];
 
 	if ( empty( $attachment_id ) || ! current_user_can( 'edit_post', $attachment_id ) ) {
 		wp_die( -1 );
@@ -3221,7 +3221,7 @@ function wp_ajax_send_attachment_to_editor() {
 
 	if ( current_user_can( 'edit_post', $id ) ) {
 		// If this attachment is unattached, attach it. Primarily a back compat thing.
-		$insert_into_post_id = intval( $_POST['post_id'] );
+		$insert_into_post_id = (int) $_POST['post_id'];
 
 		if ( 0 == $post->post_parent && $insert_into_post_id ) {
 			wp_update_post(
@@ -3622,7 +3622,7 @@ function wp_ajax_parse_embed() {
 		wp_send_json_error();
 	}
 
-	$post_id = isset( $_POST['post_ID'] ) ? intval( $_POST['post_ID'] ) : 0;
+	$post_id = isset( $_POST['post_ID'] ) ? (int) $_POST['post_ID'] : 0;
 
 	if ( $post_id > 0 ) {
 		$post = get_post( $post_id );

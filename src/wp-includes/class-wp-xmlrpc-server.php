@@ -6554,7 +6554,7 @@ class wp_xmlrpc_server extends IXR_Server {
 		do_action( 'xmlrpc_call', 'mt.getPostCategories' );
 
 		$categories = array();
-		$catids     = wp_get_post_categories( intval( $post_ID ) );
+		$catids     = wp_get_post_categories( (int) $post_ID );
 		// First listed category will be the primary category.
 		$isPrimary = true;
 		foreach ( $catids as $catid ) {
@@ -6811,7 +6811,7 @@ class wp_xmlrpc_server extends IXR_Server {
 			$post_ID = (int) $blah[1];
 		} elseif ( isset( $urltest['fragment'] ) ) {
 			// An #anchor is there, it's either...
-			if ( intval( $urltest['fragment'] ) ) {
+			if ( (int) $urltest['fragment'] ) {
 				// ...an integer #XXXX (simplest case),
 				$post_ID = (int) $urltest['fragment'];
 			} elseif ( preg_match( '/post-[0-9]+/', $urltest['fragment'] ) ) {
