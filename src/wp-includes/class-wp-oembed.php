@@ -43,6 +43,14 @@ class WP_oEmbed {
 	private $compat_methods = array( '_fetch_with_format', '_parse_json', '_parse_xml', '_parse_xml_body' );
 
 	/**
+	 * An array of providers that should be excluded from the Do Not Track (dnt=1) feature.
+	 *
+	 * @since 5.6.0
+	 * @var bool[]
+	 */
+	public $dnt_exclude_list = array();
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 2.9.0
@@ -222,6 +230,17 @@ class WP_oEmbed {
 
 		// Fix any embeds that contain new lines in the middle of the HTML which breaks wpautop().
 		add_filter( 'oembed_dataparse', array( $this, '_strip_newlines' ), 10, 3 );
+
+		$dnt_exclude_list = array(
+			'https://vimeo.com/api/oembed.{format}' => true,
+		);
+
+		/**
+		 * Store a list of oEmbed URL endpoints that should not use the dnt=1 URL parameter.
+		 * Array key is the oEmbed end point, and the value is boolean, true to indicate the URL
+		 * should be excluded from adding the dnt=1 parameter.
+		 */
+		$this->dnt_exclude_list = apply_filters( 'oembed_dnt_exclude_list', $dnt_exclude_list );
 	}
 
 	/**
@@ -520,7 +539,10 @@ class WP_oEmbed {
 		$provider = add_query_arg( 'maxwidth', (int) $args['width'], $provider );
 		$provider = add_query_arg( 'maxheight', (int) $args['height'], $provider );
 		$provider = add_query_arg( 'url', urlencode( $url ), $provider );
-		$provider = add_query_arg( 'dnt', 1, $provider );
+
+		if ( empty( $this->dnt_exclude_list[ $provider ] ) ) {
+			$provider = add_query_arg( 'dnt', 1, $provider );
+		}
 
 		/**
 		 * Filters the oEmbed URL to be fetched.

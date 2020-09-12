@@ -70,6 +70,21 @@ class Tests_WP_oEmbed extends WP_UnitTestCase {
 		$this->assertFalse( $actual );
 	}
 
+	public function test_oembed_dnt_list_prevents_dnt_param() {
+		$oembed = new WP_oEmbed();
+		$oembed->dnt_exclude_list['https://example.com/oembed'] = true;
+		add_filter( 'oembed_fetch_url', '_check_oembed_dnt_parameter' );
+		if ( empty( $this->dnt_check_called ) ) {
+			$this->fail( 'oEmbed provider fetch URL filter was not registered.' );
+		}
+		remove_filter( 'oembed_fetch_url', '_check_oembed_dnt_parameter' );
+	}
+
+	public function _check_oembed_dnt_parameter( $url ) {
+		$this->assertStringNotContainsString( 'dnt=1', $url, 'oEmbed provider URL does not contain dnt=1 parameter.' );
+		$this->dnt_check_called = true;
+	}
+
 	/**
 	 * @ticket 40673
 	 * @group multisite
