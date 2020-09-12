@@ -4719,7 +4719,7 @@ function dead_db() {
  * @return int A non-negative integer.
  */
 function absint( $maybeint ) {
-	return abs((int) $maybeint);
+	return abs( (int) $maybeint );
 }
 
 /**

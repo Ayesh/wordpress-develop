@@ -5067,7 +5067,7 @@ function wp_sprintf( $pattern, ...$args ) {
 			if ( $_fragment != $fragment ) {
 				$fragment = $_fragment;
 			} else {
-				$fragment = sprintf( $fragment, (string) $arg);
+				$fragment = sprintf( $fragment, (string) $arg );
 			}
 		}
 

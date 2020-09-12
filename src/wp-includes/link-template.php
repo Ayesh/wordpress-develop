@@ -2943,7 +2943,7 @@ function get_previous_comments_link( $label = '' ) {
 
 	$page = get_query_var( 'cpage' );
 
-	if ((int) $page <= 1 ) {
+	if ( (int) $page <= 1 ) {
 		return;
 	}
 

@@ -1772,7 +1772,7 @@ final class WP_Customize_Widgets {
 		}
 		$this->sidebar_instance_count[ $index ] += 1;
 		if ( ! $this->manager->selective_refresh->is_render_partials_request() ) {
-			printf( "\n<!--dynamic_sidebar_before:%s:%d-->\n", esc_html( $index ), (int) $this->sidebar_instance_count[ $index ]);
+			printf( "\n<!--dynamic_sidebar_before:%s:%d-->\n", esc_html( $index ), (int) $this->sidebar_instance_count[ $index ] );
 		}
 	}
 
@@ -1788,7 +1788,7 @@ final class WP_Customize_Widgets {
 	public function end_dynamic_sidebar( $index ) {
 		array_shift( $this->current_dynamic_sidebar_id_stack );
 		if ( ! $this->manager->selective_refresh->is_render_partials_request() ) {
-			printf( "\n<!--dynamic_sidebar_after:%s:%d-->\n", esc_html( $index ), (int) $this->sidebar_instance_count[ $index ]);
+			printf( "\n<!--dynamic_sidebar_after:%s:%d-->\n", esc_html( $index ), (int) $this->sidebar_instance_count[ $index ] );
 		}
 	}
 

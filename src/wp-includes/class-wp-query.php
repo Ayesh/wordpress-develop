@@ -942,7 +942,7 @@ class WP_Query {
 			$this->is_trackback = true;
 		}
 
-		if ( '' != $qv['paged'] && ((int) $qv['paged'] > 1 ) ) {
+		if ( '' != $qv['paged'] && ( (int) $qv['paged'] > 1 ) ) {
 			$this->is_paged = true;
 		}
 
@@ -1604,7 +1604,7 @@ class WP_Query {
 		// If RAND() contains a seed value, sanitize and add to allowed keys.
 		$rand_with_seed = false;
 		if ( preg_match( '/RAND\(([0-9]+)\)/i', $orderby, $matches ) ) {
-			$orderby        = sprintf( 'RAND(%s)', (int) $matches[1]);
+			$orderby        = sprintf( 'RAND(%s)', (int) $matches[1] );
 			$allowed_keys[] = $orderby;
 			$rand_with_seed = true;
 		}

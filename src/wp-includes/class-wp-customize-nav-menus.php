@@ -250,7 +250,7 @@ final class WP_Customize_Nav_Menus {
 					'type_label' => $post_type_label,
 					'object'     => $post->post_type,
 					'object_id'  => (int) $post->ID,
-					'url'        => get_permalink((int) $post->ID),
+					'url'        => get_permalink( (int) $post->ID ),
 				);
 			}
 		} elseif ( 'taxonomy' === $type ) {
@@ -411,7 +411,7 @@ final class WP_Customize_Nav_Menus {
 				'type_label' => $post_type_label,
 				'object'     => $post->post_type,
 				'object_id'  => (int) $post->ID,
-				'url'        => get_permalink((int) $post->ID),
+				'url'        => get_permalink( (int) $post->ID ),
 			);
 		}
 

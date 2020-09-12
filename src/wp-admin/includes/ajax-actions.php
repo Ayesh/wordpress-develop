@@ -3676,7 +3676,7 @@ function wp_ajax_parse_embed() {
 		if ( ! isset( $content_width ) ) {
 			$content_width = (int) $_POST['maxwidth'];
 		} else {
-			$content_width = min( $content_width, (int) $_POST['maxwidth']);
+			$content_width = min( $content_width, (int) $_POST['maxwidth'] );
 		}
 	}
 

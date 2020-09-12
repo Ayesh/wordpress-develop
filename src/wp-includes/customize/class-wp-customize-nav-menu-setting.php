@@ -433,7 +433,7 @@ class WP_Customize_Nav_Menu_Setting extends WP_Customize_Setting {
 
 		$value['name']        = trim( esc_html( $value['name'] ) ); // This sanitization code is used in wp-admin/nav-menus.php.
 		$value['description'] = sanitize_text_field( $value['description'] );
-		$value['parent']      = max( 0, (int) $value['parent']);
+		$value['parent']      = max( 0, (int) $value['parent'] );
 		$value['auto_add']    = ! empty( $value['auto_add'] );
 
 		if ( '' === $value['name'] ) {
@@ -570,7 +570,7 @@ class WP_Customize_Nav_Menu_Setting extends WP_Customize_Setting {
 				}
 
 				$widget_instance = $nav_menu_widget_setting->post_value(); // Note that this calls WP_Customize_Widgets::sanitize_widget_instance().
-				if (empty( $widget_instance['nav_menu'] ) || (int) $widget_instance['nav_menu'] !== $this->previous_term_id ) {
+				if ( empty( $widget_instance['nav_menu'] ) || (int) $widget_instance['nav_menu'] !== $this->previous_term_id ) {
 					continue;
 				}
 

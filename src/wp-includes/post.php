@@ -5229,7 +5229,7 @@ function get_page_children( $page_id, $pages ) {
 	// Build a hash of ID -> children.
 	$children = array();
 	foreach ( (array) $pages as $page ) {
-		$children[(int) $page->post_parent][] = $page;
+		$children[ (int) $page->post_parent ][] = $page;
 	}
 
 	$page_list = array();

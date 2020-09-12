@@ -856,7 +856,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 */
 	protected function _prepare_post( $post, $fields ) {
 		// Holds the data for this post. built up based on $fields.
-		$_post = array( 'post_id' => (string) $post['ID']);
+		$_post = array( 'post_id' => (string) $post['ID'] );
 
 		// Prepare common post fields.
 		$post_fields = array(
@@ -1174,7 +1174,7 @@ class wp_xmlrpc_server extends IXR_Server {
 	 * @return array The prepared user data.
 	 */
 	protected function _prepare_user( $user, $fields ) {
-		$_user = array( 'user_id' => (string) $user->ID);
+		$_user = array( 'user_id' => (string) $user->ID );
 
 		$user_fields = array(
 			'username'     => $user->user_login,
