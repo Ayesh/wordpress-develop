@@ -4128,7 +4128,7 @@ function wp_insert_post( $postarr, $wp_error = false ) {
 		}
 
 		if ( $thumbnail_support ) {
-			$thumbnail_id = intval( $postarr['_thumbnail_id'] );
+			$thumbnail_id = (int) $postarr['_thumbnail_id'];
 			if ( -1 === $thumbnail_id ) {
 				delete_post_thumbnail( $post_ID );
 			} else {
@@ -5229,7 +5229,7 @@ function get_page_children( $page_id, $pages ) {
 	// Build a hash of ID -> children.
 	$children = array();
 	foreach ( (array) $pages as $page ) {
-		$children[ intval( $page->post_parent ) ][] = $page;
+		$children[(int) $page->post_parent][] = $page;
 	}
 
 	$page_list = array();
@@ -5273,7 +5273,7 @@ function get_page_hierarchy( &$pages, $page_id = 0 ) {
 
 	$children = array();
 	foreach ( (array) $pages as $p ) {
-		$parent_id                = intval( $p->post_parent );
+		$parent_id                = (int) $p->post_parent;
 		$children[ $parent_id ][] = $p;
 	}
 

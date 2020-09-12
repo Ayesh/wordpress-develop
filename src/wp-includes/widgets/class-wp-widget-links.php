@@ -109,8 +109,8 @@ class WP_Widget_Links extends WP_Widget {
 			$instance['orderby'] = $new_instance['orderby'];
 		}
 
-		$instance['category'] = intval( $new_instance['category'] );
-		$instance['limit']    = ! empty( $new_instance['limit'] ) ? intval( $new_instance['limit'] ) : -1;
+		$instance['category'] = (int) $new_instance['category'];
+		$instance['limit']    = ! empty( $new_instance['limit'] ) ? (int) $new_instance['limit'] : -1;
 
 		return $instance;
 	}

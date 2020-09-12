@@ -155,10 +155,10 @@ function image_constrain_size_for_editor( $width, $height, $size = 'medium', $co
 function image_hwstring( $width, $height ) {
 	$out = '';
 	if ( $width ) {
-		$out .= 'width="' . intval( $width ) . '" ';
+		$out .= 'width="' . (int) $width . '" ';
 	}
 	if ( $height ) {
-		$out .= 'height="' . intval( $height ) . '" ';
+		$out .= 'height="' . (int) $height . '" ';
 	}
 	return $out;
 }
@@ -2213,7 +2213,7 @@ function gallery_shortcode( $attr ) {
 		'gallery'
 	);
 
-	$id = intval( $atts['id'] );
+	$id = (int) $atts['id'];
 
 	if ( ! empty( $atts['include'] ) ) {
 		$_attachments = get_posts(
@@ -2291,7 +2291,7 @@ function gallery_shortcode( $attr ) {
 		$icontag = 'dt';
 	}
 
-	$columns   = intval( $atts['columns'] );
+	$columns   = (int) $atts['columns'];
 	$itemwidth = $columns > 0 ? floor( 100 / $columns ) : 100;
 	$float     = is_rtl() ? 'right' : 'left';
 
@@ -2551,7 +2551,7 @@ function wp_playlist_shortcode( $attr ) {
 		'playlist'
 	);
 
-	$id = intval( $atts['id'] );
+	$id = (int) $atts['id'];
 
 	if ( 'audio' !== $atts['type'] ) {
 		$atts['type'] = 'video';
@@ -4515,7 +4515,7 @@ function get_post_galleries( $post, $html = true ) {
 
 				// Specify the post ID of the gallery we're viewing if the shortcode doesn't reference another post already.
 				if ( ! isset( $shortcode_attrs['id'] ) ) {
-					$shortcode[3] .= ' id="' . intval( $post->ID ) . '"';
+					$shortcode[3] .= ' id="' . (int) $post->ID . '"';
 				}
 
 				$gallery = do_shortcode_tag( $shortcode );

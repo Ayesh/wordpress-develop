@@ -609,7 +609,7 @@ function wp_nav_menu_item_post_type_meta_box( $object, $box ) {
 				$args['walker'] = $walker;
 
 				if ( $post_type->has_archive ) {
-					$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? intval( $_nav_menu_placeholder ) - 1 : -1;
+					$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? (int) $_nav_menu_placeholder - 1 : -1;
 					array_unshift(
 						$posts,
 						(object) array(

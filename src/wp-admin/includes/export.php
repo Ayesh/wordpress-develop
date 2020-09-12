@@ -372,7 +372,7 @@ function export_wp( $args = array() ) {
 
 		foreach ( $authors as $author ) {
 			echo "\t<wp:author>";
-			echo '<wp:author_id>' . intval( $author->ID ) . '</wp:author_id>';
+			echo '<wp:author_id>' . (int) $author->ID . '</wp:author_id>';
 			echo '<wp:author_login>' . wxr_cdata( $author->user_login ) . '</wp:author_login>';
 			echo '<wp:author_email>' . wxr_cdata( $author->user_email ) . '</wp:author_email>';
 			echo '<wp:author_display_name>' . wxr_cdata( $author->display_name ) . '</wp:author_display_name>';
@@ -395,7 +395,7 @@ function export_wp( $args = array() ) {
 
 		foreach ( $nav_menus as $menu ) {
 			echo "\t<wp:term>";
-			echo '<wp:term_id>' . intval( $menu->term_id ) . '</wp:term_id>';
+			echo '<wp:term_id>' . (int) $menu->term_id . '</wp:term_id>';
 			echo '<wp:term_taxonomy>nav_menu</wp:term_taxonomy>';
 			echo '<wp:term_slug>' . wxr_cdata( $menu->slug ) . '</wp:term_slug>';
 			wxr_term_name( $menu );
@@ -478,7 +478,7 @@ function export_wp( $args = array() ) {
 
 	<?php foreach ( $cats as $c ) : ?>
 	<wp:category>
-		<wp:term_id><?php echo intval( $c->term_id ); ?></wp:term_id>
+		<wp:term_id><?php echo (int) $c->term_id; ?></wp:term_id>
 		<wp:category_nicename><?php echo wxr_cdata( $c->slug ); ?></wp:category_nicename>
 		<wp:category_parent><?php echo wxr_cdata( $c->parent ? $cats[ $c->parent ]->slug : '' ); ?></wp:category_parent>
 		<?php
@@ -490,7 +490,7 @@ function export_wp( $args = array() ) {
 	<?php endforeach; ?>
 	<?php foreach ( $tags as $t ) : ?>
 	<wp:tag>
-		<wp:term_id><?php echo intval( $t->term_id ); ?></wp:term_id>
+		<wp:term_id><?php echo (int) $t->term_id; ?></wp:term_id>
 		<wp:tag_slug><?php echo wxr_cdata( $t->slug ); ?></wp:tag_slug>
 		<?php
 		wxr_tag_name( $t );
@@ -620,7 +620,7 @@ function export_wp( $args = array() ) {
 				foreach ( $comments as $c ) :
 					?>
 		<wp:comment>
-			<wp:comment_id><?php echo intval( $c->comment_ID ); ?></wp:comment_id>
+			<wp:comment_id><?php echo (int) $c->comment_ID; ?></wp:comment_id>
 			<wp:comment_author><?php echo wxr_cdata( $c->comment_author ); ?></wp:comment_author>
 			<wp:comment_author_email><?php echo wxr_cdata( $c->comment_author_email ); ?></wp:comment_author_email>
 			<wp:comment_author_url><?php echo esc_url_raw( $c->comment_author_url ); ?></wp:comment_author_url>

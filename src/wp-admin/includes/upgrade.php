@@ -2014,7 +2014,7 @@ function upgrade_430_fix_comments() {
 		return;
 	}
 
-	$allowed_length = intval( $content_length['length'] ) - 10;
+	$allowed_length = (int) $content_length['length'] - 10;
 
 	$comments = $wpdb->get_results(
 		"SELECT `comment_ID` FROM `{$wpdb->comments}`

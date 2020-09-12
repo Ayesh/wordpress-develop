@@ -69,7 +69,7 @@ class WP_Importer {
 		$result = $wpdb->get_results( $sql );
 
 		if ( ! empty( $result ) ) {
-			$count = intval( $result[0]->cnt );
+			$count = (int) $result[0]->cnt;
 		}
 
 		// Unset to save memory.

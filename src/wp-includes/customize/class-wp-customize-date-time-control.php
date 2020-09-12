@@ -81,8 +81,8 @@ class WP_Customize_Date_Time_Control extends WP_Customize_Control {
 	public function json() {
 		$data = parent::json();
 
-		$data['maxYear']          = intval( $this->max_year );
-		$data['minYear']          = intval( $this->min_year );
+		$data['maxYear']          = (int) $this->max_year;
+		$data['minYear']          = (int) $this->min_year;
 		$data['allowPastDate']    = (bool) $this->allow_past_date;
 		$data['twelveHourFormat'] = (bool) $this->twelve_hour_format;
 		$data['includeTime']      = (bool) $this->include_time;

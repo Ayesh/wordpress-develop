@@ -258,7 +258,7 @@ class WP_Term_Query {
 		$query['offset'] = absint( $query['offset'] );
 
 		// 'parent' overrides 'child_of'.
-		if ( 0 < intval( $query['parent'] ) ) {
+		if (0 < (int) $query['parent']) {
 			$query['child_of'] = false;
 		}
 
@@ -346,7 +346,7 @@ class WP_Term_Query {
 		}
 
 		// 'parent' overrides 'child_of'.
-		if ( 0 < intval( $args['parent'] ) ) {
+		if (0 < (int) $args['parent']) {
 			$args['child_of'] = false;
 		}
 

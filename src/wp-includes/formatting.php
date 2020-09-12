@@ -4725,7 +4725,7 @@ function sanitize_option( $option, $value ) {
 			if ( null === $value ) {
 				$value = 1;
 			} else {
-				$value = intval( $value );
+				$value = (int) $value;
 			}
 			break;
 
@@ -5067,7 +5067,7 @@ function wp_sprintf( $pattern, ...$args ) {
 			if ( $_fragment != $fragment ) {
 				$fragment = $_fragment;
 			} else {
-				$fragment = sprintf( $fragment, strval( $arg ) );
+				$fragment = sprintf( $fragment, (string) $arg);
 			}
 		}
 

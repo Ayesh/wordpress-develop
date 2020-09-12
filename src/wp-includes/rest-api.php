@@ -1933,7 +1933,7 @@ function rest_sanitize_value_from_schema( $value, $args, $param = '' ) {
 	}
 
 	if ( 'string' === $args['type'] ) {
-		return strval( $value );
+		return (string) $value;
 	}
 
 	return $value;
