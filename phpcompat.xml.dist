@@ -40,6 +40,9 @@
 	-->
 	<exclude-pattern>/vendor/*</exclude-pattern>
 
+	<!-- Exclude PHPMailer library from checks -->
+	<exclude-pattern>/src/wp-includes/PHPMailer/*</exclude-pattern>
+
 	<!--
 		PHPCompatibilityParagonieSodiumCompat prevents false positives in `sodium_compat`.
 		However, because these files are included in a non-standard path, false positives are triggered in WordPress Core.
