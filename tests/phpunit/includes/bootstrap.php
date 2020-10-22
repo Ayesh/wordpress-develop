@@ -34,6 +34,23 @@ if ( ! is_readable( $config_file_path ) ) {
 	exit( 1 );
 }
 
+$required_extensions = array(
+	'gd',
+);
+$missing_extensions  = array();
+
+foreach ( $required_extensions as $required_extension ) {
+	if ( ! extension_loaded( $required_extension ) ) {
+		$missing_extensions[] = $required_extension;
+	}
+}
+
+if ( ! empty( $missing_extensions ) ) {
+	echo "Error: The following required extension(s) are missing from the testing environment.\n";
+	echo implode( ', ', $missing_extensions );
+	exit( 1 );
+}
+
 require_once $config_file_path;
 require_once __DIR__ . '/functions.php';
 
