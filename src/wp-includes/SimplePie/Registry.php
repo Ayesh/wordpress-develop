@@ -211,8 +211,7 @@ class SimplePie_Registry
 					// Cache::create() methods
 					if ($method === 'get_handler')
 					{
-						$result = @call_user_func_array(array($class, 'create'), $parameters);
-						return $result;
+						$class = 'SimplePie_Cache';
 					}
 					break;
 			}
