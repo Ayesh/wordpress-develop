@@ -270,6 +270,10 @@ function wp_maintenance() {
 	}
 
 	if ( file_exists( WP_CONTENT_DIR . '/maintenance.php' ) ) {
+		status_header( 503 );
+		nocache_headers();
+		header( 'Retry-After: 600' );
+
 		require_once WP_CONTENT_DIR . '/maintenance.php';
 		die();
 	}
